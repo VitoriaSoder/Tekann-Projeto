@@ -1,0 +1,25 @@
+## .NET
+bin/
+obj/
+*.user
+*.suo
+*.vs/
+.vs/
+*.userprefs
+
+## Publish
+publish/
+**/PublishProfiles/*.pubxml.user
+
+## Logs
+logs/
+*.log
+
+## Environment
+appsettings.Production.json
+appsettings.Local.json
+.env
+
+## OS
+.DS_Store
+Thumbs.db

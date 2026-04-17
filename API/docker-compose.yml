@@ -1,0 +1,20 @@
+networks:
+    icontainer-network:
+        external: true
+services:
+    banco-dev:
+        container_name: ic-mssql-A7GD
+        environment:
+            - ACCEPT_EULA=Y
+            - MSSQL_SA_PASSWORD=${DB_PASSWORD}
+            - MSSQL_PID=Developer
+        image: mcr.microsoft.com/mssql/server:2022-latest
+        labels:
+            createdBy: icontainer
+        networks:
+            - icontainer-network
+        ports:
+            - "1433:1433"
+        restart: unless-stopped
+        volumes:
+            - ./data:/var/opt/mssql/data

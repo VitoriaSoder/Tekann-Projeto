@@ -1,0 +1,41 @@
+# .NET
+**/bin/
+**/obj/
+*.user
+*.suo
+.vs/
+**/PublishProfiles/
+**/appsettings.Production.json
+**/appsettings.Local.json
+
+# Node
+node_modules/
+dist/
+.env
+.env.prod
+.env.local
+.env.*.local
+*.example
+*secrets*
+*key*
+dist-ssr
+*.local
+forge_history*.py
+
+# Logs
+*.log
+logs/
+
+# Docker
+**/data/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Agents
+.claude/
+.cursor/
+.gemini/
+.agent/
+.cortex/
