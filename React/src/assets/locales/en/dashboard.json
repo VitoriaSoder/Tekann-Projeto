@@ -1,0 +1,22 @@
+{
+  "title": "Overview",
+  "description": "Track the performance of courts and bookings.",
+  "courts_registered": "Registered Courts",
+  "total_bookings": "Total Bookings",
+  "active_bookings": "Active Bookings",
+  "available_courts": "Available Courts",
+  "courts_registered_desc": "Total active courts available for booking in the system.",
+  "total_bookings_desc": "Total volume of bookings made since the beginning.",
+  "active_bookings_desc": "Confirmed bookings for the upcoming periods.",
+  "choose_court": "Choose a court to see available times.",
+  "loading": "Loading courts...",
+  "no_courts_title": "Oops! No courts around here.",
+  "no_courts": "No courts available at the moment.",
+
+  "view_schedules": "View schedules",
+  "occupancy_by_court": "Occupancy by Court",
+  "bookings_by_weekday": "Bookings by Weekday",
+  "popular_times": "Popular Times",
+  "reservations": "Bookings",
+  "online_system": "Online System"
+}

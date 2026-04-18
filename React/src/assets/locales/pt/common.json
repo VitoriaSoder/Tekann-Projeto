@@ -1,0 +1,33 @@
+{
+  "search": "Buscar...",
+  "filter": "Filtrar",
+  "sort": "Ordenar",
+  "page": "Página",
+  "next": "Próximo",
+  "previous": "Anterior",
+  "cancel": "Cancelar",
+  "confirm": "Confirmar",
+  "reason": "Motivo",
+  "export": "Exportar",
+  "theme": "Tema",
+  "light": "Claro",
+  "dark": "Escuro",
+  "system": "Sistema",
+  "profile": "Perfil",
+  "logout": "Sair",
+  "language": "Idioma",
+  "back": "Voltar",
+  "none": "Nenhum",
+  "minutes": "minutos",
+  "loading": "Carregando...",
+  "saving": "Salvando...",
+  "save": "Salvar",
+  "select": "Selecione...",
+  "login": "Entrar",
+  "register": "Cadastrar"
+}
+
+
+
+
+

@@ -1,0 +1,32 @@
+{
+  "search": "Search...",
+  "filter": "Filter",
+  "sort": "Sort",
+  "page": "Page",
+  "next": "Next",
+  "previous": "Previous",
+  "cancel": "Cancel",
+  "confirm": "Confirm",
+  "reason": "Reason",
+  "export": "Export",
+  "theme": "Theme",
+  "light": "Light",
+  "dark": "Dark",
+  "system": "System",
+  "profile": "Profile",
+  "logout": "Logout",
+  "language": "Language",
+  "back": "Back",
+  "none": "None",
+  "minutes": "minutes",
+  "loading": "Loading...",
+  "saving": "Saving...",
+  "save": "Save",
+  "select": "Select...",
+  "login": "Login",
+  "register": "Register"
+}
+
+
+
+

@@ -1,0 +1,32 @@
+{
+  "title": "Quadras",
+  "description": "Gerencie o cadastro e configuração das quadras.",
+  "name_label": "Nome",
+  "type_label": "Tipo",
+  "region_label": "Região",
+  "capacity_label": "Capacidade",
+  "operation_label": "Funcionamento",
+  "people": "pessoas",
+  "capacity_prefix": "Até",
+  "status_active": "Ativa",
+
+  "status_inactive": "Inativa",
+  "new_court": "Nova Quadra",
+  "court_type": "Tipo de Quadra:",
+  "all_types": "Todos os tipos",
+  "form_title": "Nova Quadra",
+  "form_description": "Preencha as informações da quadra para cadastrá-la no sistema.",
+  "name_placeholder": "Ex: Quadra A",
+  "region_placeholder": "Ex: Centro",
+  "opening_time": "Abertura",
+  "closing_time": "Fechamento",
+  "slot_duration": "Duração do Slot (minutos)",
+  "create_success": "Quadra cadastrada com sucesso!",
+  "create_error": "Erro ao cadastrar quadra.",
+  "creating": "Cadastrando...",
+  "create_button": "Cadastrar Quadra",
+  "not_found": "Quadra não encontrada.",
+  "sports_label": "Modalidades"
+}
+
+

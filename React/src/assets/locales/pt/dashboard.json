@@ -1,0 +1,23 @@
+{
+  "title": "Visão Geral",
+  "description": "Acompanhe o desempenho das quadras e reservas.",
+  "courts_registered": "Quadras Cadastradas",
+  "total_bookings": "Total de Reservas",
+  "active_bookings": "Reservas Ativas",
+  "available_courts": "Quadras Disponíveis",
+  "courts_registered_desc": "Total de quadras ativas e disponíveis para reserva no sistema.",
+  "total_bookings_desc": "Volume total de agendamentos realizados desde o início.",
+  "active_bookings_desc": "Agendamentos confirmados para os próximos períodos.",
+  "choose_court": "Escolha uma quadra para ver os horários disponíveis.",
+
+  "loading": "Carregando quadras...",
+  "no_courts_title": "Ops! Nenhuma quadra por aqui.",
+  "no_courts": "Nenhuma quadra disponível no momento.",
+  "view_schedules": "Ver horários",
+  "occupancy_by_court": "Ocupação por Quadra",
+  "bookings_by_weekday": "Reservas por Dia da Semana",
+  "popular_times": "Horários Populares",
+  "reservations": "Reservas",
+  "online_system": "Sistema Online"
+}
+
