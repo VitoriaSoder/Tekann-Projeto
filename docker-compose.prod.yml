@@ -5,13 +5,12 @@ services:
     image: mcr.microsoft.com/mssql/server:2022-latest
     container_name: ic-mssql-A7GD
     user: root
-    network_mode: host
     environment:
       - ACCEPT_EULA=Y
       - MSSQL_SA_PASSWORD=${DB_PASSWORD}
       - MSSQL_PID=Developer
     volumes:
-      - sql_data:/var/opt/mssql/data
+      - sql_data_prod:/var/opt/mssql/data
     restart: unless-stopped
 
   api:
@@ -19,10 +18,13 @@ services:
       context: ./API
       dockerfile: Dockerfile
     container_name: tekann-api-prod
-    network_mode: host
+    ports:
+      - "5000:5000"
+    depends_on:
+      - database
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
-      - ConnectionStrings__DefaultConnection=Server=localhost;Database=TekannDb;User Id=sa;Password=${DB_PASSWORD};TrustServerCertificate=True;Encrypt=False;
+      - ConnectionStrings__DefaultConnection=Server=database;Database=TekannDbProd;User Id=sa;Password=${DB_PASSWORD};TrustServerCertificate=True;Encrypt=False;
       - Jwt__Secret=${JWT_SECRET}
       - Jwt__Issuer=tekann-api
       - Jwt__Audience=tekann-app
@@ -36,10 +38,11 @@ services:
       args:
         - VITE_API_URL=${VITE_API_URL}
     container_name: tekann-frontend-prod
-    network_mode: host
-    # Nota: No modo host, a porta é definida no nginx.conf do container.
-    # Vou precisar ajustar o seu nginx.conf para usar a porta 8080.
+    ports:
+      - "8080:8080"
+    depends_on:
+      - api
     restart: unless-stopped
 
 volumes:
-  sql_data:
+  sql_data_prod:

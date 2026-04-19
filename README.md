@@ -35,43 +35,47 @@ O **SportsCourt** é uma plataforma completa para gestão de quadras, agendament
 
 ---
 
-## 📦 Como Rodar o Projeto
+## 📦 Como Rodar Localmente
 
-### 1. Clonando o Repositório
+### Pré-requisitos
+- [.NET 9 SDK](https://dotnet.microsoft.com/download)
+- [Node.js](https://nodejs.org/) (v18+)
+- [Docker](https://www.docker.com/) (para o banco de dados)
+
+### 1. Clonar o repositório
 ```bash
 git clone https://github.com/VitoriaSoder/Tekann-Projeto.git
 cd Tekann-Projeto
 ```
 
-### 2. Rodando o Backend (API)
-Navegue até a pasta da API:
+### 2. Configurar variáveis de ambiente
+```bash
+cp .env.example .env
+```
+Edite o `.env` e defina uma senha para o banco. Os valores padrão já funcionam para desenvolvimento.
+
+### 3. Subir o banco de dados
+```bash
+docker compose up -d
+```
+> O SQL Server ficará disponível em `localhost:1433`.
+
+### 4. Rodar a API
 ```bash
 cd API
-```
-**Pré-requisitos:** SDK do .NET 9 e SQL Server rodando.
-```bash
-# Restaurar dependências
 dotnet restore
-
-# Executar a aplicação
 dotnet run --project Gateway/WebAPI/WebAPI.csproj
 ```
 > A API estará disponível em: `http://localhost:5000`
 
-### 3. Rodando o Frontend (React)
-Navegue até a pasta do React:
+### 5. Rodar o Frontend
+Em outro terminal:
 ```bash
 cd React
+npm install
+npm run dev
 ```
-**Pré-requisitos:** Node.js e Yarn/NPM.
-```bash
-# Instalar dependências
-yarn install
-
-# Iniciar o servidor de desenvolvimento
-yarn dev
-```
-> O Frontend estará disponível em: `http://localhost:5173`
+> O frontend estará disponível em: `http://localhost:5173`
 
 ---
 
@@ -79,7 +83,6 @@ yarn dev
 
 O projeto possui uma suíte completa de testes automatizados (Unidade e Integração).
 
-Para rodar todos os testes do backend:
 ```bash
 cd API
 dotnet test
@@ -89,7 +92,7 @@ dotnet test
 
 ## 🐳 Rodando com Docker (Produção)
 
-Para subir o ambiente completo (Banco + API + Frontend):
+Para subir o ambiente completo (Banco + API + Frontend) em modo produção:
 ```bash
 docker compose -f docker-compose.prod.yml up -d --build
 ```
