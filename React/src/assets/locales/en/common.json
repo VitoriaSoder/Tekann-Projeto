@@ -16,6 +16,7 @@
   "profile": "Profile",
   "logout": "Logout",
   "language": "Language",
+  "access": "Access",
   "back": "Back",
   "none": "None",
   "minutes": "minutes",
@@ -24,9 +25,131 @@
   "save": "Save",
   "select": "Select...",
   "login": "Login",
-  "register": "Register"
+  "register": "Register",
+  "day": "Day",
+  "week": "Week",
+  "month": "Month",
+  "list": "List",
+  "available": "Available",
+  "occupied": "Occupied",
+  "landing": {
+    "hero": {
+      "imageAlt": "Tennis player on court",
+      "title1": "The freedom to",
+      "title2": "manage and play.",
+      "subtitle1": "The complete platform to manage courts, schedules and bookings with simplicity and efficiency.",
+      "subtitle2": "",
+      "subtitle3": "",
+      "cta": {
+        "start": "Get Started",
+        "login": "I already have an account"
+      }
+    },
+    "mockups": {
+      "title1": "The freedom to",
+      "title2": "manage and play.",
+      "subtitle": "The complete platform to manage courts, schedules and bookings with simplicity and efficiency."
+    },
+    "features": {
+      "title1": "Everything you need",
+      "title2": "to grow your arena.",
+      "subtitle": "We develop tools so you can focus on your customer experience.",
+      "items": {
+        "schedule": {
+          "title": "Schedules Grid",
+          "description": "View the occupancy of all courts in a single integrated screen."
+        },
+        "online_booking": {
+          "title": "Online Booking",
+          "description": "Intuitive reservation system that guarantees the time for your players."
+        },
+        "simple_reservation": {
+          "title": "Simplified Reservation",
+          "description": "Direct and fast reservation process, without unnecessary steps."
+        },
+        "court_control": {
+          "title": "Court Control",
+          "description": "Manage multiple spaces, court types and regions with ease."
+        },
+        "dashboard": {
+          "title": "Management Dashboard",
+          "description": "Track the total number of courts and bookings with a consolidated view in the admin panel."
+        },
+        "continuous_access": {
+          "title": "Continuous Access",
+          "description": "Your arena available for online bookings at any time of day or night."
+        }
+      }
+    },
+    "howItWorks": {
+      "title": "Unbeatable Flow",
+      "subtitle": "A direct flow, from court registration to booking control, without complexity.",
+      "steps": {
+        "step1": {
+          "title": "Configure your Courts",
+          "description": "Register your courts with name, type, region, capacity and schedule. The platform organizes everything automatically."
+        },
+        "step2": {
+          "title": "Booking in Seconds",
+          "description": "Players access the schedules grid and book in a simple and direct way, without the need for phone calls."
+        },
+        "step3": {
+          "title": "Booking Control",
+          "description": "Manage the status of each booking in real time. Confirm, cancel or track bookings through the admin panel."
+        }
+      }
+    },
+    "forWho": {
+      "title1": "Dominate your",
+      "title2": "region.",
+      "subtitle": "Whether you are an arena manager or a player looking for a court, SportsCourt offers the right tools for each profile.",
+      "managers": {
+        "badge": "For Managers",
+        "title": "Centralize your arena's operation in a complete platform.",
+        "benefits": [
+          "Management of multiple courts in a single grid",
+          "Dashboard with general view of courts and bookings",
+          "Status control for each booking",
+          "Creation and editing of courts by sport and region"
+        ]
+      },
+      "users": {
+        "badge": "For Users",
+        "title": "Book your court quickly and without complications.",
+        "benefits": [
+          "Immediate view of available slots",
+          "Booking times in a few clicks",
+          "Accessible booking history",
+          "Profile and personal data management"
+        ]
+      }
+    },
+    "finalCta": {
+      "title": "Ready to go professional?",
+      "subtitle": "Centralize the management of your courts and offer a professional booking experience for your players. All in one place.",
+      "button": "Create my account now"
+    },
+    "courts": {
+      "title1": "Supported",
+      "title2": "Sports",
+      "subtitle": "Configure any sport with custom schedules. The platform adapts to your arena's profile.",
+      "supportedBadge": "Supported",
+      "configureButton": "Configure My Courts",
+      "padel": {
+        "name": "Padel",
+        "description": "Manage padel courts with configurable schedules and booking control."
+      },
+      "tennis": {
+        "name": "Tennis",
+        "description": "Support for tennis courts with custom slots by duration and capacity."
+      },
+      "beachTennis": {
+        "name": "Beach Tennis",
+        "description": "Administer beach tennis courts with online scheduling for your players."
+      }
+    }
+  }
 }
-
 
 
 

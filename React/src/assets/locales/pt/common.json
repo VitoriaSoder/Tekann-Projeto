@@ -16,6 +16,7 @@
   "profile": "Perfil",
   "logout": "Sair",
   "language": "Idioma",
+  "access": "Acesso",
   "back": "Voltar",
   "none": "Nenhum",
   "minutes": "minutos",
@@ -24,9 +25,131 @@
   "save": "Salvar",
   "select": "Selecione...",
   "login": "Entrar",
-  "register": "Cadastrar"
+  "register": "Cadastrar",
+  "day": "Dia",
+  "week": "Semana",
+  "month": "Mês",
+  "list": "Lista",
+  "available": "Disponível",
+  "occupied": "Ocupado",
+  "landing": {
+    "hero": {
+      "imageAlt": "Tenista em quadra",
+      "title1": "A liberdade de",
+      "title2": "gerenciar e jogar.",
+      "subtitle1": "A plataforma completa para gerenciar quadras, agendamentos e reservas com simplicidade e eficiência.",
+      "subtitle2": "",
+      "subtitle3": "",
+      "cta": {
+        "start": "Começar Agora",
+        "login": "Já tenho conta"
+      }
+    },
+    "mockups": {
+      "title1": "A liberdade de",
+      "title2": "gerenciar e jogar.",
+      "subtitle": "A plataforma completa para gerenciar quadras, agendamentos e reservas com simplicidade e eficiência."
+    },
+    "features": {
+      "title1": "Tudo o que você precisa",
+      "title2": "para crescer sua arena.",
+      "subtitle": "Desenvolvemos ferramentas para que você foque na experiência do seu cliente.",
+      "items": {
+        "schedule": {
+          "title": "Grade de Horários",
+          "description": "Visualize a ocupação de todas as quadras em uma única tela integrada."
+        },
+        "online_booking": {
+          "title": "Agendamento Online",
+          "description": "Sistema de reserva intuitivo que garante o horário para seus jogadores."
+        },
+        "simple_reservation": {
+          "title": "Reserva Simplificada",
+          "description": "Processo de reserva direto e rápido, sem etapas desnecessárias."
+        },
+        "court_control": {
+          "title": "Controle de Quadras",
+          "description": "Gerencie múltiplos espaços, tipos de quadra e regiões com facilidade."
+        },
+        "dashboard": {
+          "title": "Dashboard de Gestão",
+          "description": "Acompanhe o total de quadras e reservas com visão consolidada no painel administrativo."
+        },
+        "continuous_access": {
+          "title": "Acesso Contínuo",
+          "description": "Sua arena disponível para reservas online a qualquer hora do dia ou da noite."
+        }
+      }
+    },
+    "howItWorks": {
+      "title": "Fluxo Imbatível",
+      "subtitle": "Um fluxo direto, do cadastro das quadras até o controle das reservas, sem complexidade.",
+      "steps": {
+        "step1": {
+          "title": "Configure suas Quadras",
+          "description": "Cadastre suas quadras com nome, tipo, região, capacidade e grade de horários. A plataforma organiza tudo automaticamente."
+        },
+        "step2": {
+          "title": "Reserva em Segundos",
+          "description": "Jogadores acessam a grade de horários e realizam a reserva de forma simples e direta, sem necessidade de ligações."
+        },
+        "step3": {
+          "title": "Controle de Reservas",
+          "description": "Gerencie o status de cada reserva em tempo real. Confirme, cancele ou acompanhe agendamentos pelo painel administrativo."
+        }
+      }
+    },
+    "forWho": {
+      "title1": "Domine sua",
+      "title2": "região.",
+      "subtitle": "Seja você gestor de uma arena ou jogador em busca de uma quadra, o SportsCourt oferece as ferramentas certas para cada perfil.",
+      "managers": {
+        "badge": "Para Gestores",
+        "title": "Centralize a operação da sua arena em uma plataforma completa.",
+        "benefits": [
+          "Gestão de múltiplas quadras em grade única",
+          "Dashboard com visão geral de quadras e reservas",
+          "Controle de status de cada reserva",
+          "Criação e edição de quadras por modalidade e região"
+        ]
+      },
+      "users": {
+        "badge": "Para Usuários",
+        "title": "Reserve sua quadra de forma rápida e sem complicação.",
+        "benefits": [
+          "Visualização imediata de slots disponíveis",
+          "Reserva de horários em poucos cliques",
+          "Histórico de reservas acessível",
+          "Gerenciamento de perfil e dados pessoais"
+        ]
+      }
+    },
+    "finalCta": {
+      "title": "Pronto para profissionalizar?",
+      "subtitle": "Centralize a gestão das suas quadras e ofereça uma experiência de reserva profissional para seus jogadores. Tudo em um único lugar.",
+      "button": "Criar minha conta agora"
+    },
+    "courts": {
+      "title1": "Modalidades",
+      "title2": "Suportadas",
+      "subtitle": "Configure qualquer modalidade com grades de horários personalizadas. A plataforma se adapta ao perfil da sua arena.",
+      "supportedBadge": "Suportado",
+      "configureButton": "Configurar Minhas Quadras",
+      "padel": {
+        "name": "Padel",
+        "description": "Gerencie quadras de padel com grades de horários configuráveis e controle de reservas."
+      },
+      "tennis": {
+        "name": "Tênis",
+        "description": "Suporte a quadras de tênis com slots personalizados por duração e capacidade."
+      },
+      "beachTennis": {
+        "name": "Beach Tennis",
+        "description": "Administre quadras de beach tennis com agendamento online para seus jogadores."
+      }
+    }
+  }
 }
-
 
 
 

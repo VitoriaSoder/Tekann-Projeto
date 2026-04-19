@@ -1,3 +1,6 @@
+import { Text } from '@/components/common/text'
+import { cn } from '@/lib/utils'
+
 interface BenefitItemProps {
   text: string
   highlight?: boolean
@@ -5,7 +8,7 @@ interface BenefitItemProps {
 export function BenefitItem({ text, highlight = false }: BenefitItemProps) {
   return (
     <li className="flex gap-4 items-start">
-      <div className={`mt-1 rounded-full p-1.5 flex-shrink-0 flex items-center justify-center ${highlight ? 'bg-primary/20 text-primary' : 'bg-primary text-black'}`}>
+      <div className={`mt-1 rounded-full p-1.5 flex-shrink-0 flex items-center justify-center ${highlight ? 'bg-black/10 text-black' : 'bg-primary text-black'}`}>
         <svg
           width="14"
           height="14"
@@ -19,11 +22,12 @@ export function BenefitItem({ text, highlight = false }: BenefitItemProps) {
           <polyline points="20 6 9 17 4 12" />
         </svg>
       </div>
-      <div>
-        <p className={`text-lg font-medium leading-snug ${highlight ? 'opacity-90' : 'text-foreground'}`}>
-          {text}
-        </p>
-      </div>
+      <Text 
+        variant="none" 
+        className={cn("leading-snug font-medium", highlight ? "text-black" : "text-foreground")}
+      >
+        {text}
+      </Text>
     </li>
   )
 }
