@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next"
 import { cn } from "@/lib/utils"
 
 export interface TextProps {
-  variant?: "default" | "muted" | "small" | "large" | "bold"
+  variant?: "default" | "muted" | "small" | "large" | "bold" | "none" | "inherit"
   children?: ReactNode
   tKey?: string | (string | number)[]
   tValues?: Record<string, any>
@@ -26,6 +26,8 @@ export function Text({
     small: "text-sm text-muted-foreground",
     large: "text-lg font-medium text-foreground",
     bold: "font-bold text-foreground",
+    none: "",
+    inherit: "text-inherit font-inherit leading-inherit",
   }
 
   const renderContent = () => {

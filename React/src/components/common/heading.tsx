@@ -24,6 +24,7 @@ export function Heading({
     "section-title": "font-semibold text-sm text-neutral-500 uppercase tracking-widest mb-2",
     "section-heading": "font-semibold text-4xl tracking-tight mb-12 leading-[1.1]",
     default: "font-semibold text-2xl tracking-tight",
+    none: "",
   }
 
   return (
