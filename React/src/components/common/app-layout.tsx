@@ -39,7 +39,7 @@ function SidebarContent({ onNavigate }: { onNavigate?: () => void }) {
       <div className="px-6 py-5 border-b border-border flex items-center justify-between">
         <div className="flex items-center gap-2.5">
           <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-primary-foreground shrink-0">
-            <Logo size={16} strokeWidth={2.5} />
+            <Logo size={16} strokeWidth={2.5} showText={false} />
           </div>
           <Heading level={4} className="text-base tracking-tight uppercase m-0">SportsCourt</Heading>
         </div>
@@ -116,7 +116,7 @@ export function AppLayout() {
       <div className="md:hidden fixed top-0 left-0 right-0 z-40 h-14 bg-card border-b border-border flex items-center justify-between px-4">
         <div className="flex items-center gap-2.5">
           <div className="w-7 h-7 rounded-full bg-primary flex items-center justify-center text-primary-foreground shrink-0">
-            <Logo size={13} strokeWidth={2.5} />
+            <Logo size={13} strokeWidth={2.5} showText={false} />
           </div>
           <Heading level={4} className="text-sm tracking-tight uppercase m-0">SportsCourt</Heading>
         </div>

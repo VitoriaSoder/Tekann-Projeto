@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next"
 import { cn } from "@/lib/utils"
 import { LayoutGrid, Columns, CalendarDays, List } from "lucide-react"
 export type ViewMode = "day" | "week" | "month" | "list"
@@ -6,13 +7,14 @@ type ViewToggleProps = {
   onChange: (mode: ViewMode) => void
   className?: string
 }
-const options: { value: ViewMode; label: string; icon: React.ElementType }[] = [
-  { value: "day", label: "Dia", icon: LayoutGrid },
-  { value: "week", label: "Semana", icon: Columns },
-  { value: "month", label: "Mês", icon: CalendarDays },
-  { value: "list", label: "Lista", icon: List },
-]
 export function ViewToggle({ value, onChange, className }: ViewToggleProps) {
+  const { t } = useTranslation()
+  const options: { value: ViewMode; label: string; icon: React.ElementType }[] = [
+    { value: "day", label: t("common:day"), icon: LayoutGrid },
+    { value: "week", label: t("common:week"), icon: Columns },
+    { value: "month", label: t("common:month"), icon: CalendarDays },
+    { value: "list", label: t("common:list"), icon: List },
+  ]
   return (
     <div className={cn("flex items-center bg-muted rounded-full p-1 gap-0.5", className)}>
       {options.map(opt => {
