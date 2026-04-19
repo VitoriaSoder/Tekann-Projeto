@@ -8,4 +8,7 @@ public interface IUserService
     Task<AuthResponseDto> RegisterAsync(RegisterDto dto);
     Task<IEnumerable<UserAdminDto>> GetAllAsync();
     Task UpdateStatusAsync(Guid id, bool isActive);
+    Task UpdateProfileAsync(Guid userId, UpdateProfileDto dto);
+    Task ChangePasswordAsync(Guid userId, ChangePasswordDto dto);
+    Task DeleteAccountAsync(Guid userId);
 }

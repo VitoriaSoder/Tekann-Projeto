@@ -4,6 +4,8 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Project;
+using Repositories.Interfaces.Bookings;
+using Repositories.Interfaces.Courts;
 using Repositories.Interfaces.Users;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -15,12 +17,16 @@ namespace Application.Application.Users;
 public class UserService : IUserService
 {
     private readonly IUserRepository _userRepository;
+    private readonly IBookingRepository _bookingRepository;
+    private readonly ICourtRepository _courtRepository;
     private readonly JwtConfiguration _jwtConfig;
     private readonly ILogger<UserService> _logger;
 
-    public UserService(IUserRepository userRepository, IOptions<JwtConfiguration> jwtConfig, ILogger<UserService> logger)
+    public UserService(IUserRepository userRepository, IBookingRepository bookingRepository, ICourtRepository courtRepository, IOptions<JwtConfiguration> jwtConfig, ILogger<UserService> logger)
     {
         _userRepository = userRepository;
+        _bookingRepository = bookingRepository;
+        _courtRepository = courtRepository;
         _jwtConfig = jwtConfig.Value;
         _logger = logger;
     }
@@ -134,5 +140,54 @@ public class UserService : IUserService
             Email = user.Email,
             Role = user.Role
         };
+    }
+
+    public async Task UpdateProfileAsync(Guid userId, UpdateProfileDto dto)
+    {
+        var user = await _userRepository.GetByIdAsync(userId)
+            ?? throw new InvalidOperationException("Usuário não encontrado.");
+
+        user.Name = dto.Name;
+        await _userRepository.UpdateAsync(user);
+
+        _logger.LogInformation("Perfil do usuário {Id} atualizado.", userId);
+    }
+
+    public async Task ChangePasswordAsync(Guid userId, ChangePasswordDto dto)
+    {
+        var user = await _userRepository.GetByIdAsync(userId)
+            ?? throw new InvalidOperationException("Usuário não encontrado.");
+
+        if (!BCrypt.Net.BCrypt.Verify(dto.CurrentPassword, user.PasswordHash))
+            throw new InvalidOperationException("Senha atual incorreta.");
+
+        user.PasswordHash = BCrypt.Net.BCrypt.HashPassword(dto.NewPassword);
+        await _userRepository.UpdateAsync(user);
+
+        _logger.LogInformation("Senha do usuário {Id} alterada.", userId);
+    }
+
+    public async Task DeleteAccountAsync(Guid userId)
+    {
+        var user = await _userRepository.GetByIdAsync(userId)
+            ?? throw new InvalidOperationException("Usuário não encontrado.");
+
+        var userBookings = await _bookingRepository.GetAllByUserAsync(userId);
+        foreach (var booking in userBookings)
+            await _bookingRepository.DeleteAsync(booking.Id);
+
+        var courts = await _courtRepository.GetAllByAdminAsync(userId);
+        foreach (var court in courts)
+        {
+            var courtBookings = await _bookingRepository.GetByCourtIdAsync(court.Id);
+            foreach (var booking in courtBookings)
+                await _bookingRepository.DeleteAsync(booking.Id);
+
+            await _courtRepository.DeleteAsync(court.Id);
+        }
+
+        await _userRepository.DeleteAsync(user);
+
+        _logger.LogInformation("Conta do usuário {Id} deletada.", userId);
     }
 }
