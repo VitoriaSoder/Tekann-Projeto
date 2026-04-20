@@ -32,6 +32,9 @@
   "list": "Lista",
   "available": "Disponível",
   "occupied": "Ocupado",
+  "admin": "Admin",
+  "today": "Hoje",
+  "tomorrow": "Amanhã",
   "landing": {
     "hero": {
       "imageAlt": "Tenista em quadra",

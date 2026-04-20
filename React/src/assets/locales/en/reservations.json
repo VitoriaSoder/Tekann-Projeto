@@ -15,6 +15,7 @@
   "court": "Court",
   "date": "Date",
   "time": "Time",
+  "occupied": "Occupied",
   "status": "Status",
   "book_for": "Book for",
   "select_time": "Select a time",

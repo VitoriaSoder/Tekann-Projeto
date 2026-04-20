@@ -32,6 +32,9 @@
   "list": "List",
   "available": "Available",
   "occupied": "Occupied",
+  "admin": "Admin",
+  "today": "Today",
+  "tomorrow": "Tomorrow",
   "landing": {
     "hero": {
       "imageAlt": "Tennis player on court",
