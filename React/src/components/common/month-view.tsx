@@ -1,5 +1,6 @@
 import { format, isToday, isSameMonth } from "date-fns"
 import { cn } from "@/lib/utils"
+import { useTranslation } from "react-i18next"
 const WEEKDAYS = ["Seg", "Ter", "Qua", "Qui", "Sex", "Sáb", "Dom"]
 type DaySummary = {
   occupied: number
@@ -13,6 +14,7 @@ type MonthViewProps = {
   onDayClick: (date: Date) => void
 }
 export function MonthView({ selectedDate, monthDays, daySummary, onDayClick }: MonthViewProps) {
+  const { t } = useTranslation()
   return (
     <div className="bg-card border border-border rounded-[24px] overflow-hidden shadow-sm">
       {}
@@ -80,12 +82,12 @@ export function MonthView({ selectedDate, monthDays, daySummary, onDayClick }: M
                   <div className="flex items-center justify-between">
                     {summary.occupied > 0 && (
                       <span className="text-[10px] font-semibold text-destructive">
-                        {summary.occupied} ocupado{summary.occupied !== 1 ? "s" : ""}
+                        {t("schedule:occupied_slots", { count: summary.occupied })}
                       </span>
                     )}
                     {summary.available > 0 && (
                       <span className="text-[10px] font-semibold text-muted-foreground ml-auto">
-                        {summary.available} livre{summary.available !== 1 ? "s" : ""}
+                        {t("schedule:free_slots", { count: summary.available })}
                       </span>
                     )}
                   </div>
@@ -109,13 +111,13 @@ export function MonthView({ selectedDate, monthDays, daySummary, onDayClick }: M
       {}
       <div className="flex items-center gap-4 px-4 py-3 border-t border-border">
         <span className="flex items-center gap-1.5 text-xs font-semibold text-muted-foreground">
-          <span className="w-2.5 h-2.5 rounded-full bg-primary" /> Disponível
+          <span className="w-2.5 h-2.5 rounded-full bg-primary" /> {t("schedule:available")}
         </span>
         <span className="flex items-center gap-1.5 text-xs font-semibold text-muted-foreground">
-          <span className="w-2.5 h-2.5 rounded-full bg-amber-500" /> Parcial
+          <span className="w-2.5 h-2.5 rounded-full bg-amber-500" /> {t("schedule:partial")}
         </span>
         <span className="flex items-center gap-1.5 text-xs font-semibold text-muted-foreground">
-          <span className="w-2.5 h-2.5 rounded-full bg-destructive" /> Lotado
+          <span className="w-2.5 h-2.5 rounded-full bg-destructive" /> {t("schedule:full")}
         </span>
       </div>
     </div>

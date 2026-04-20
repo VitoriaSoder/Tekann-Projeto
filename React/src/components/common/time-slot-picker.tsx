@@ -40,7 +40,7 @@ export function TimeSlotPicker({
   }, [courtId, date])
 
   const isOccupied = (time: string) => {
-    return busySlots.some(b => b.startTime <= time && b.endTime > time)
+    return busySlots.some(b => b.startTime.substring(0, 5) <= time && b.endTime.substring(0, 5) > time)
   }
 
   const handleSlotClick = (time: string) => {

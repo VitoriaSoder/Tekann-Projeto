@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 import { cn } from "@/lib/utils"
+import { useTranslation } from "react-i18next"
 export type GridTimelineProps<THeader> = {
   headers: THeader[]
   hours: string[]
@@ -9,6 +10,7 @@ export type GridTimelineProps<THeader> = {
   className?: string
 }
 export function GridTimeline<THeader>({ headers, hours, renderHeader, renderSlot, renderTabLabel, className }: GridTimelineProps<THeader>) {
+  const { t } = useTranslation()
   const [activeTab, setActiveTab] = useState(0)
   const safeTab = Math.min(activeTab, headers.length - 1)
   return (
@@ -88,10 +90,10 @@ export function GridTimeline<THeader>({ headers, hours, renderHeader, renderSlot
       {}
       <div className="flex items-center gap-4 px-4 py-3 border-t border-border">
         <span className="flex items-center gap-1.5 text-xs font-semibold text-muted-foreground">
-          <span className="w-2.5 h-2.5 rounded-full bg-primary" /> Disponível
+          <span className="w-2.5 h-2.5 rounded-full bg-primary" /> {t("schedule:available")}
         </span>
         <span className="flex items-center gap-1.5 text-xs font-semibold text-muted-foreground">
-          <span className="w-2.5 h-2.5 rounded-full bg-destructive" /> Ocupado
+          <span className="w-2.5 h-2.5 rounded-full bg-destructive" /> {t("schedule:occupied")}
         </span>
       </div>
     </div>

@@ -1,10 +1,24 @@
 import { cn } from "@/lib/utils"
+import { useTranslation } from "react-i18next"
+
 export type StatusBadgeProps = {
   status: "AVAILABLE" | "OCCUPIED" | "ADMIN"
   className?: string
   children?: React.ReactNode
 }
+
 export function StatusBadge({ status, className, children }: StatusBadgeProps) {
+  const { t } = useTranslation()
+  
+  const getStatusLabel = () => {
+    switch (status) {
+      case "AVAILABLE": return t("common:available")
+      case "OCCUPIED": return t("common:occupied")
+      case "ADMIN": return t("common:admin")
+      default: return status
+    }
+  }
+
   return (
     <div
       className={cn(
@@ -15,7 +29,7 @@ export function StatusBadge({ status, className, children }: StatusBadgeProps) {
         className
       )}
     >
-      {children || status === "AVAILABLE" ? "Disponível" : status === "OCCUPIED" ? "Ocupado" : "Admin"}
+      {children || getStatusLabel()}
     </div>
   )
 }

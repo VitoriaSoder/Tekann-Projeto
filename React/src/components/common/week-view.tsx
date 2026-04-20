@@ -1,16 +1,18 @@
 import { useState } from "react"
-import { format, isToday } from "date-fns"
+import { format, isToday, addMinutes } from "date-fns"
 import { ptBR } from "date-fns/locale"
 import { cn } from "@/lib/utils"
 import { ScheduleDay } from "@/features/schedule/schemas/schedule-schema"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { ReservationModal } from "./reservation-modal"
+import { useTranslation } from "react-i18next"
 type WeekViewProps = {
   weekData: ScheduleDay[]
   hours: string[]
   onDayClick?: (date: Date) => void
 }
 export function WeekView({ weekData, hours, onDayClick }: WeekViewProps) {
+  const { t } = useTranslation()
   const courts = weekData[0]?.grid ?? []
   const [selectedCourtId, setSelectedCourtId] = useState<string>(courts[0]?.courtId ?? "")
   const activeCourt = courts.find(c => c.courtId === selectedCourtId) ?? courts[0]
@@ -82,10 +84,10 @@ export function WeekView({ weekData, hours, onDayClick }: WeekViewProps) {
                       : "border-transparent hover:bg-muted hover:border-primary/30"
                   )}>
                     {isOccupied ? (
-                      <span className="text-xs font-semibold text-destructive">Ocupado</span>
+                      <span className="text-xs font-semibold text-destructive">{t("schedule:occupied")}</span>
                     ) : dayGrid ? (
                       <ReservationModal
-                        defaultValues={{ courtId: selectedCourtId, date: weekData[activeDay].date, startTime: hour }}
+                        defaultValues={{ courtId: selectedCourtId, date: weekData[activeDay].date, startTime: hour, endTime: format(addMinutes(new Date(`1970-01-01T${hour}:00`), 60), "HH:mm") }}
                         trigger={
                           <button className="w-full h-full min-h-[56px] flex items-center justify-center">
                             <span className="text-xs font-semibold text-primary opacity-0 group-hover:opacity-100">+</span>
@@ -155,7 +157,7 @@ export function WeekView({ weekData, hours, onDayClick }: WeekViewProps) {
                         : "border-transparent hover:bg-muted hover:border-primary/30 group/cell"
                     )}>
                       {isOccupied ? (
-                        <span className="text-xs font-semibold text-destructive">Ocupado</span>
+                        <span className="text-xs font-semibold text-destructive">{t("schedule:occupied")}</span>
                       ) : court ? (
                         <ReservationModal
                           defaultValues={{ courtId: selectedCourtId, date: day.date, startTime: hour }}
@@ -177,10 +179,10 @@ export function WeekView({ weekData, hours, onDayClick }: WeekViewProps) {
       {}
       <div className="flex items-center gap-4 px-4 py-3 border-t border-border">
         <span className="flex items-center gap-1.5 text-xs font-semibold text-muted-foreground">
-          <span className="w-2.5 h-2.5 rounded-full bg-primary" /> Disponível
+          <span className="w-2.5 h-2.5 rounded-full bg-primary" /> {t("schedule:available")}
         </span>
         <span className="flex items-center gap-1.5 text-xs font-semibold text-muted-foreground">
-          <span className="w-2.5 h-2.5 rounded-full bg-destructive" /> Ocupado
+          <span className="w-2.5 h-2.5 rounded-full bg-destructive" /> {t("schedule:occupied")}
         </span>
       </div>
     </div>
