@@ -4,10 +4,11 @@ import { DataTable, ColumnDef } from "@/components/common/DataTable/data-table"
 import { QuadraFilter } from "./components/quadra-filter"
 import { CourtFormModal } from "./components/court-form-modal"
 import { useCourts } from "@/logic/hooks/use-courts"
-import { Heading } from "@/components/common/heading"
 import { Text } from "@/components/common/text"
 import { Box } from "@/components/common/box"
 import { useTranslation } from "react-i18next"
+
+import { PageLayout } from "@/components/common/page-layout"
 
 export function CourtList() {
   const navigate = useNavigate()
@@ -46,15 +47,11 @@ export function CourtList() {
   })
 
   return (
-    <Box className="p-4 md:p-8 max-w-[1200px] mx-auto w-full">
-      <Box className="flex justify-between items-center mb-6 md:mb-10 gap-4">
-        <Box>
-          <Heading level={1} tKey="courts:title" className="text-xl md:text-3xl font-extrabold tracking-tight text-foreground m-0" />
-          <Text variant="muted" tKey="courts:description" className="mt-1 text-sm md:text-base" />
-        </Box>
-        <CourtFormModal />
-      </Box>
-
+    <PageLayout
+      titleKey="courts:title"
+      descriptionKey="courts:description"
+      actions={<CourtFormModal />}
+    >
       <Box className="bg-card rounded-[20px] border border-border shadow-sm overflow-hidden">
         <Box className="p-4 border-b border-border">
           <QuadraFilter value={filterType} onValueChange={setFilterType} />
@@ -71,7 +68,7 @@ export function CourtList() {
           onRowClick={(row) => navigate(`/courts/${row.id}`)}
         />
       </Box>
-    </Box>
+    </PageLayout>
   )
 }
 

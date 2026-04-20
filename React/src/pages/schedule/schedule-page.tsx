@@ -1,12 +1,14 @@
 import { useState } from "react"
 import { useSearchParams } from "react-router-dom"
 import { format } from "date-fns"
-import { ptBR } from "date-fns/locale"
+import { ptBR, enUS } from "date-fns/locale"
 import { useSchedule } from "@/logic/hooks/use-schedule"
-import { formatFullDate, formatShortDate } from "@/helpers/date-utils"
+import { formatShortDate, getViewTitle } from "@/helpers/date-utils"
+import { prepareScheduleDataForExport } from "@/helpers/schedule-utils"
 import { DateNavigation } from "@/components/common/date-navigation"
 import { GridTimeline } from "@/components/common/grid-timeline"
 import { StatusBadge } from "@/components/common/status-badge"
+import { PageLayout } from "@/components/common/page-layout"
 import { ReservationModal } from "@/components/common/reservation-modal"
 import { WeekView } from "@/components/common/week-view"
 import { MonthView } from "@/components/common/month-view"
@@ -20,16 +22,6 @@ import { Calendar as CalendarIcon, Clock, Users, Download, ChevronLeft, ChevronR
 import { cn } from "@/lib/utils"
 import { exportToCSV } from "@/helpers/csv-helper"
 import { useTranslation } from "react-i18next"
-function getViewTitle(view: ViewMode, selectedDate: Date, weekDays: Date[]): string {
-  if (view === "day") return formatFullDate(selectedDate)
-  if (view === "week") {
-    const start = format(weekDays[0], "d MMM", { locale: ptBR })
-    const end = format(weekDays[6], "d MMM yyyy", { locale: ptBR })
-    return `${start} – ${end}`
-  }
-  if (view === "month") return format(selectedDate, "MMMM yyyy", { locale: ptBR })
-  return "Agenda – próximos 30 dias"
-}
 export default function SchedulePage() {
   const { selectedDate, scheduleData, weekData, weekDays, monthDays, daySummary, hours, bookings, actions } = useSchedule()
   const [isMobileCalendarOpen, setIsMobileCalendarOpen] = useState(false)
@@ -37,7 +29,8 @@ export default function SchedulePage() {
   const [viewMode, setViewMode] = useState<ViewMode>("day")
   const [searchParams] = useSearchParams()
   const defaultCourtId = searchParams.get("courtId") || undefined
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
+  const dateLocale = i18n.language === "en" ? enUS : ptBR
   const handleMobileDateSelect = (date: Date | undefined) => {
     if (date) { actions.selectDate(date); setIsMobileCalendarOpen(false) }
   }
@@ -45,17 +38,8 @@ export default function SchedulePage() {
     if (date) { actions.selectDate(date); setIsDesktopCalendarOpen(false) }
   }
   const handleExportCSV = () => {
-    const dataToExport = scheduleData.grid.flatMap(court =>
-      court.slots
-        .filter(slot => slot.status === "OCCUPIED")
-        .map(slot => ({
-          Court: court.courtName,
-          Time: slot.time,
-          Date: formatShortDate(selectedDate),
-          Status: slot.status,
-        }))
-    )
-    exportToCSV(dataToExport, `agenda-${formatShortDate(selectedDate)}`)
+    const dataToExport = prepareScheduleDataForExport(scheduleData.grid, selectedDate, dateLocale)
+    exportToCSV(dataToExport, `agenda-${format(selectedDate, "EEE, dd MMM", { locale: dateLocale })}`)
   }
   const handlePrev = () => {
     if (viewMode === "day") actions.prevDay()
@@ -113,12 +97,12 @@ export default function SchedulePage() {
         </div>
         {isOccupied && exactSlot && (
           <div className="mt-auto space-y-0.5 md:space-y-1 z-10">
-            <h4 className="text-xs md:text-sm font-semibold text-foreground line-clamp-1">Reserva Confirmada</h4>
+            <h4 className="text-xs md:text-sm font-semibold text-foreground line-clamp-1">{t("schedule:confirmed_booking")}</h4>
             <div className="flex items-center gap-1.5 text-xs text-muted-foreground font-medium">
               <Clock className="w-3 h-3 md:w-3.5 md:h-3.5 opacity-70" /> {exactSlot.time} (60 min)
             </div>
             <div className="hidden md:flex items-center gap-1.5 text-xs text-muted-foreground font-medium mt-0.5">
-              <Users className="w-3.5 h-3.5 opacity-70" /> 4 Jogadores
+              <Users className="w-3.5 h-3.5 opacity-70" /> {t("schedule:players_count", { count: 4 })}
             </div>
           </div>
         )}
@@ -128,14 +112,16 @@ export default function SchedulePage() {
       </div>
     )
   }
-  const viewTitle = getViewTitle(viewMode, selectedDate, weekDays)
+  const viewTitle = getViewTitle(viewMode, selectedDate, weekDays, t, dateLocale)
   const showNavArrows = viewMode !== "list"
   return (
-    <div className="w-full flex-1 p-3 md:p-8 bg-background min-h-screen">
-      <div className="max-w-[1400px] mx-auto w-full mb-4 md:mb-6 mt-1 md:mt-2">
-        {}
+    <PageLayout
+      titleKey="schedule:title"
+      descriptionKey="schedule:description"
+      maxWidth="xl"
+    >
+      <div className="mb-4 md:mb-6 mt-1 md:mt-2">
         <div className="flex md:hidden flex-col gap-2.5">
-          {}
           <div className="flex items-center gap-2">
             {showNavArrows && (
               <div className="flex items-center gap-1 shrink-0">
@@ -171,12 +157,11 @@ export default function SchedulePage() {
               <ReservationModal defaultValues={{ courtId: defaultCourtId }} />
             </div>
           </div>
-          {}
+
           <ViewToggle value={viewMode} onChange={setViewMode} />
         </div>
-        {}
+
         <div className="hidden md:flex flex-row items-center justify-between gap-4">
-          {}
           <div className="flex items-center gap-3">
             {showNavArrows ? (
               <DateNavigation
@@ -193,7 +178,7 @@ export default function SchedulePage() {
                 <PopoverTrigger asChild>
                   <Button variant="outline" className="h-10 px-4 rounded-full font-medium border-border hover:bg-accent shadow-sm">
                     <CalendarIcon className="w-4 h-4 mr-2 text-muted-foreground" />
-                    {formatShortDate(selectedDate)}
+                    {formatShortDate(selectedDate, dateLocale)}
                   </Button>
                 </PopoverTrigger>
                 <PopoverContent className="w-auto p-0" align="start">
@@ -202,20 +187,20 @@ export default function SchedulePage() {
               </Popover>
             )}
           </div>
-          {}
+  
           <div className="flex items-center gap-3">
             <ViewToggle value={viewMode} onChange={setViewMode} />
             {viewMode === "day" && (
               <Button variant="outline" onClick={handleExportCSV} className="rounded-full border-border">
                 <Download className="w-4 h-4 mr-2" />
-                {t("reservations.export_csv")}
+                {t("reservations:export_csv")}
               </Button>
             )}
             <ReservationModal defaultValues={{ courtId: defaultCourtId }} />
           </div>
         </div>
       </div>
-      {}
+
       <div className="max-w-[1400px] mx-auto w-full anim-fade-up">
         {viewMode === "day" && (
           <GridTimeline<ScheduleGridItem>
@@ -249,6 +234,6 @@ export default function SchedulePage() {
           />
         )}
       </div>
-    </div>
+    </PageLayout>
   )
 }

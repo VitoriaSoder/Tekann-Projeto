@@ -51,10 +51,10 @@ export default function Register() {
                 </SelectTrigger>
                 <SelectContent className="rounded-xl border-border shadow-xl">
                   <SelectItem value="USER" className="font-medium cursor-pointer">
-                    <Text tKey="auth:account_type_user" as="span" />
+                    <Text variant="inherit" tKey="auth:account_type_user" as="span" />
                   </SelectItem>
                   <SelectItem value="ADMIN" className="font-medium cursor-pointer">
-                    <Text tKey="auth:account_type_admin" as="span" />
+                    <Text variant="inherit" tKey="auth:account_type_admin" as="span" />
                   </SelectItem>
                 </SelectContent>
               </Select>
@@ -88,9 +88,9 @@ export default function Register() {
           className="w-full h-14 rounded-2xl bg-primary text-black hover:bg-primary/90 text-sm font-black uppercase tracking-widest transition-all mt-8 shadow-xl hover:scale-[1.02] disabled:opacity-60 disabled:cursor-not-allowed"
         >
           {isLoading ? (
-            <Text variant="bold" tKey="auth:creating_account" as="span" className="text-sm text-black" />
+            <Text variant="none" tKey="auth:creating_account" as="span" className="text-sm font-black text-black" />
           ) : (
-            <Text variant="bold" tKey="auth:register_button" as="span" className="text-sm text-black" />
+            <Text variant="none" tKey="auth:register_button" as="span" className="text-sm font-black text-black" />
           )}
         </Button>
       </form>

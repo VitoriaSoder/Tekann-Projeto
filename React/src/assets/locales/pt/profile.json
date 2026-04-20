@@ -1,0 +1,32 @@
+{
+  "title": "Meu Perfil",
+  "personal_info": {
+    "title": "Informações Pessoais",
+    "description": "Atualize seu nome de exibição",
+    "name_label": "Nome Completo",
+    "save_changes": "Salvar Alterações",
+    "saving": "Salvando..."
+  },
+  "security": {
+    "title": "Segurança",
+    "description": "Altere sua senha de acesso",
+    "current_password_label": "Senha Atual",
+    "current_password_hint": "Informe a senha atual.",
+    "new_password_label": "Nova Senha",
+    "new_password_hint": "A nova senha deve ter pelo menos 6 caracteres.",
+    "confirm_password_label": "Confirmar",
+    "confirm_password_hint": "Confirme a nova senha.",
+    "update_password": "Atualizar Senha",
+    "updating": "Atualizando..."
+  },
+  "danger_zone": {
+    "title": "Zona de Perigo",
+    "description": "Ações irreversíveis na conta",
+    "delete_account_hint": "Esta ação é irreversível. Todos os seus dados serão removidos permanentemente.",
+    "delete_account_button": "Remover Conta",
+    "modal_title": "Remover conta",
+    "modal_description": "Tem certeza que deseja remover sua conta permanentemente?",
+    "confirm_delete": "Sim, remover",
+    "deleting": "Removendo..."
+  }
+}

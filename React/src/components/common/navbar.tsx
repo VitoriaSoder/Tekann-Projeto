@@ -44,8 +44,7 @@ export function Navbar() {
             variant="default"
             className="bg-primary text-black rounded-full hover:scale-105 transition-all px-6 font-black shadow-lg shadow-primary/10"
           >
-
-            <Text variant="bold" tKey="navigation:sign_up" as="span" className="text-xs uppercase tracking-widest" />
+            <Text variant="none" tKey="navigation:sign_up" as="span" className="text-xs uppercase tracking-widest" />
           </Button>
         </div>
       </div>

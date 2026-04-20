@@ -1,0 +1,13 @@
+{
+  "title": "Your Arena in Real Time",
+  "description": "Intuitive interface designed for managers. Total control of courts, schedules and bookings in a single panel.",
+  "subtitle": "Schedule for the next 30 days",
+  "confirmed_booking": "Confirmed Booking",
+  "players_count": "{{count}} Players",
+  "available": "Available",
+  "occupied": "Occupied",
+  "day": "Day",
+  "week": "Week",
+  "month": "Month",
+  "list": "List"
+}

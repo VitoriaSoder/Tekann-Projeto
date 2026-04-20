@@ -40,9 +40,9 @@ export default function Login() {
           className="w-full h-14 rounded-2xl bg-primary text-black hover:bg-primary/90 text-sm font-black uppercase tracking-widest transition-all mt-8 shadow-xl hover:scale-[1.02] shadow-primary/10 disabled:opacity-60 disabled:cursor-not-allowed"
         >
           {isLoading ? (
-            <Text variant="bold" tKey="auth:logging_in" as="span" className="text-sm text-black" />
+            <Text variant="none" tKey="auth:logging_in" as="span" className="text-sm font-black text-black" />
           ) : (
-            <Text variant="bold" tKey="auth:login_button" as="span" className="text-sm text-black" />
+            <Text variant="none" tKey="auth:login_button" as="span" className="text-sm font-black text-black" />
           )}
         </Button>
       </form>

@@ -1,0 +1,32 @@
+{
+  "title": "My Profile",
+  "personal_info": {
+    "title": "Personal Information",
+    "description": "Update your display name",
+    "name_label": "Full Name",
+    "save_changes": "Save Changes",
+    "saving": "Saving..."
+  },
+  "security": {
+    "title": "Security",
+    "description": "Change your access password",
+    "current_password_label": "Current Password",
+    "current_password_hint": "Enter your current password.",
+    "new_password_label": "New Password",
+    "new_password_hint": "New password must be at least 6 characters.",
+    "confirm_password_label": "Confirm",
+    "confirm_password_hint": "Confirm your new password.",
+    "update_password": "Update Password",
+    "updating": "Updating..."
+  },
+  "danger_zone": {
+    "title": "Danger Zone",
+    "description": "Irreversible account actions",
+    "delete_account_hint": "This action is irreversible. All your data will be permanently removed.",
+    "delete_account_button": "Remove Account",
+    "modal_title": "Remove account",
+    "modal_description": "Are you sure you want to permanently remove your account?",
+    "confirm_delete": "Yes, remove",
+    "deleting": "Removing..."
+  }
+}

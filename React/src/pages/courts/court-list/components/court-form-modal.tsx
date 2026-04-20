@@ -52,10 +52,10 @@ export function CourtFormModal() {
     <>
       <Button
         onClick={() => setIsOpen(true)}
-        className="h-10 px-5 rounded-full bg-primary hover:bg-primary/90 text-black font-bold gap-2 hover:scale-[1.02] transition-transform shadow-md shadow-primary/10"
+        className="h-10 px-5 rounded-full bg-primary hover:bg-primary/90 text-black font-black uppercase tracking-tight gap-2 hover:scale-[1.02] transition-transform shadow-md shadow-primary/10"
       >
-        <Plus size={16} />
-        <Text variant="bold" tKey="courts:new_court" as="span" className="text-sm text-black" />
+        <Plus size={16} strokeWidth={3} />
+        <Text variant="none" tKey="courts:new_court" as="span" className="text-sm" />
       </Button>
 
       <Dialog open={isOpen} onOpenChange={handleOpenChange}>
@@ -201,11 +201,11 @@ export function CourtFormModal() {
                 <Button type="button" variant="ghost" onClick={() => handleOpenChange(false)} className="flex-1 rounded-full h-11 font-medium text-muted-foreground">
                   <Text variant="bold" tKey="common:cancel" as="span" className="text-sm" />
                 </Button>
-                <Button type="submit" disabled={form.formState.isSubmitting} className="flex-1 h-11 rounded-full bg-primary hover:bg-primary/90 text-black font-bold disabled:opacity-60 shadow-md shadow-primary/10">
+                <Button type="submit" disabled={form.formState.isSubmitting} className="flex-1 h-11 rounded-full bg-primary hover:bg-primary/90 text-black font-black uppercase tracking-tight disabled:opacity-60 shadow-md shadow-primary/10">
                   {form.formState.isSubmitting ? (
-                    <Text variant="bold" tKey="courts:creating" as="span" className="text-sm" />
+                    <Text variant="none" tKey="courts:creating" as="span" className="text-sm" />
                   ) : (
-                    <Text variant="bold" tKey="courts:create_button" as="span" className="text-sm" />
+                    <Text variant="none" tKey="courts:create_button" as="span" className="text-sm" />
                   )}
                 </Button>
               </DialogFooter>

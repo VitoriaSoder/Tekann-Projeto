@@ -96,8 +96,8 @@ export function ReservationModal({
     <Dialog open={isOpen} onOpenChange={handleOpenChange}>
       <DialogTrigger asChild>
         {trigger ? trigger : (
-          <Button className="bg-primary text-black font-bold hover:bg-primary/90 rounded-full shadow-sm hover:scale-[1.02] transition-transform">
-            <Text variant="bold" tKey="reservations:new_reservation" as="span" className="text-sm text-black" />
+          <Button className="bg-primary text-black font-black uppercase tracking-tight hover:bg-primary/90 rounded-full shadow-sm hover:scale-[1.02] transition-transform h-11 px-6">
+            <Text variant="none" tKey="reservations:new_reservation" as="span" className="text-sm" />
           </Button>
         )}
       </DialogTrigger>
@@ -259,12 +259,12 @@ export function ReservationModal({
               <Button 
                 type="submit" 
                 disabled={form.formState.isSubmitting} 
-                className="rounded-full w-full sm:w-auto h-11 px-8 font-bold bg-primary text-black hover:bg-primary/90 hover:scale-[1.02] transition-all shadow-md disabled:opacity-70 disabled:hover:scale-100"
+                className="rounded-full w-full sm:w-auto h-11 px-8 font-black uppercase tracking-tight bg-primary text-black hover:bg-primary/90 hover:scale-[1.02] transition-all shadow-md disabled:opacity-70 disabled:hover:scale-100"
               >
                 {form.formState.isSubmitting ? (
-                  <Text variant="bold" tKey="common:saving" as="span" className="text-sm text-black" />
+                  <Text variant="none" tKey="common:saving" as="span" className="text-sm" />
                 ) : (
-                  <Text variant="bold" tKey="common:save" as="span" className="text-sm text-black" />
+                  <Text variant="none" tKey="common:save" as="span" className="text-sm" />
                 )}
               </Button>
             </DialogFooter>

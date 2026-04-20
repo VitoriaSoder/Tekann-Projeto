@@ -11,6 +11,7 @@ import { Box } from "@/components/common/box"
 import { Heading } from "@/components/common/heading"
 import { Text } from "@/components/common/text"
 import { Button } from "@/components/ui/button"
+import { PageLayout } from "@/components/common/page-layout"
 
 function StatCard({
   labelKey,
@@ -77,16 +78,13 @@ function AdminDashboard() {
     [bookings.lista])
 
   return (
-    <Box className="relative p-5 md:p-8 lg:p-12 max-w-[1400px] mx-auto w-full min-h-screen">
+    <PageLayout
+      titleKey="dashboard:title"
+      descriptionKey="dashboard:description"
+      maxWidth="xl"
+    >
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[120px] -z-10 pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-primary/3 rounded-full blur-[100px] -z-10 pointer-events-none" />
-
-      <Box className="mb-8 md:mb-12 flex flex-col md:flex-row md:items-end justify-between gap-4 md:gap-6">
-        <Box>
-          <Heading level={1} tKey="dashboard:title" className="text-xl md:text-3xl font-extrabold tracking-tight text-foreground m-0" />
-          <Text variant="muted" tKey="dashboard:description" className="mt-1 text-sm md:text-base" />
-        </Box>
-      </Box>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mb-8 md:mb-12">
         <StatCard
@@ -110,9 +108,8 @@ function AdminDashboard() {
         />
       </div>
 
-
       <DashboardCharts data={bookings.lista} />
-    </Box>
+    </PageLayout>
   )
 }
 
@@ -162,8 +159,8 @@ function CourtCard({ court }: { court: Court }) {
             {court.openingTime} – {court.closingTime}
           </Text>
         </Box>
-        <Button className="mt-6 w-full h-14 rounded-2xl bg-primary text-primary-foreground text-xs font-black uppercase tracking-widest hover:bg-primary/90 transition-all hover:scale-[1.02] shadow-xl shadow-primary/10">
-          <Text variant="bold" tKey="dashboard:view_schedules" as="span" className="text-xs" />
+        <Button className="mt-6 w-full h-14 rounded-2xl bg-primary text-black text-xs font-black uppercase tracking-widest hover:bg-primary/90 transition-all hover:scale-[1.02] shadow-xl shadow-primary/10">
+          <Text variant="none" tKey="dashboard:view_schedules" as="span" className="text-xs" />
         </Button>
       </Box>
 
@@ -182,13 +179,12 @@ function UserDashboard() {
   const activeCourts = courts.lista.filter(c => c.isActive)
 
   return (
-    <Box className="relative p-5 md:p-8 lg:p-12 max-w-[1400px] mx-auto w-full min-h-screen">
+    <PageLayout
+      titleKey="dashboard:available_courts"
+      descriptionKey="dashboard:choose_court"
+      maxWidth="xl"
+    >
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[120px] -z-10 pointer-events-none" />
-
-      <Box className="mb-8 md:mb-12">
-        <Heading level={1} tKey="dashboard:available_courts" className="text-xl md:text-3xl font-extrabold tracking-tight text-foreground m-0" />
-        <Text variant="muted" tKey="dashboard:choose_court" className="mt-1 text-sm md:text-base" />
-      </Box>
 
       {courts.load && (
         <Box className="flex flex-col items-center justify-center py-40 gap-4">
@@ -213,7 +209,7 @@ function UserDashboard() {
           <CourtCard key={court.id} court={court} />
         ))}
       </div>
-    </Box>
+    </PageLayout>
   )
 }
 

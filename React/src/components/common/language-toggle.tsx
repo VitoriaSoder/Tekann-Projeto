@@ -29,10 +29,10 @@ export function LanguageToggle() {
 
       <DropdownMenuContent align="start" className="w-56 rounded-xl border-border shadow-xl">
         <DropdownMenuItem onClick={() => changeLanguage("pt")} className="rounded-lg gap-2 cursor-pointer">
-          <span className="text-xs font-bold">PT</span> Português
+          <span className="text-xs font-bold">PT</span> <Text variant="inherit" as="span">Português</Text>
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => changeLanguage("en")} className="rounded-lg gap-2 cursor-pointer">
-          <span className="text-xs font-bold">EN</span> English
+          <span className="text-xs font-bold">EN</span> <Text variant="inherit" as="span">English</Text>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

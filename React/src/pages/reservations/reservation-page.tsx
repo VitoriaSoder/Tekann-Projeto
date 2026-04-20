@@ -13,6 +13,7 @@ import { Button } from "@/components/ui/button"
 import { useTranslation } from "react-i18next"
 import { Heading } from "@/components/common/heading"
 import { Text } from "@/components/common/text"
+import { PageLayout } from "@/components/common/page-layout"
 
 export default function ReservationPage() {
   const { 
@@ -53,14 +54,12 @@ export default function ReservationPage() {
   }
   const totalPages = Math.ceil(total / filters.limit)
   return (
-    <div className="p-4 md:p-8 max-w-[1000px] mx-auto w-full">
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 md:gap-6 mb-6 md:mb-8">
-        <div>
-          <Heading level={1} tKey="reservations:title" className="text-xl md:text-3xl font-extrabold tracking-tight text-foreground m-0" />
-          <Text variant="muted" tKey="reservations:description" className="mt-1 text-sm md:text-base font-medium" />
-        </div>
-        <ReservationModal />
-      </div>
+    <PageLayout
+      titleKey="reservations:title"
+      descriptionKey="reservations:description"
+      maxWidth="md"
+      actions={<ReservationModal />}
+    >
       <div className="flex flex-col md:flex-row gap-4 mb-6">
         <div className="relative flex-1">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
@@ -173,7 +172,7 @@ export default function ReservationPage() {
         onClose={() => setCancelModal({ ...cancelModal, isOpen: false })}
         onConfirm={(reason) => handleCancel(cancelModal.id, reason)}
       />
-    </div>
+    </PageLayout>
   )
 }
 

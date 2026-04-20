@@ -22,21 +22,19 @@ export function ThemeToggle() {
             <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
             <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
           </div>
-          <Text variant="bold" tKey="common:theme" as="span" className="text-sm" />
+          <Text variant="inherit" tKey="common:theme" as="span" className="text-sm" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="start" className="w-56 rounded-xl border-border shadow-xl">
         <DropdownMenuItem onClick={() => setTheme("light")} className="rounded-lg gap-2 cursor-pointer">
           <Sun size={14} />
-          <Text tKey="common:light" as="span" className="text-sm" />
+          <Text variant="inherit" tKey="common:light" as="span" className="text-sm" />
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => setTheme("dark")} className="rounded-lg gap-2 cursor-pointer">
           <Moon size={14} />
-          <Text tKey="common:dark" as="span" className="text-sm" />
+          <Text variant="inherit" tKey="common:dark" as="span" className="text-sm" />
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   )
 }
-
-
