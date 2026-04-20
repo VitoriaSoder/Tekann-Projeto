@@ -1,27 +1,29 @@
 import soccerImg from '@/assets/images/soccer-court.png'
 import tennisImg from '@/assets/images/tennis-court.png'
 import multisportImg from '@/assets/images/multisport-court.png'
+import padelImg from '@/assets/images/padel-court.png'
+import beachTennisImg from '@/assets/images/beach-tennis-court.png'
+
 export const courtTypes = [
   {
-    id: 'padle',
-    name: 'Padel',
-    description: 'Gerencie quadras de padel com grades de horários configuráveis e controle de reservas.',
+    id: 'padel',
+    nameKey: 'landing.courts.padel.name',
+    descriptionKey: 'landing.courts.padel.description',
     icon: 'PADLE',
-    image: tennisImg
+    image: padelImg
   },
   {
     id: 'tennis',
-    name: 'Tênis',
-    description: 'Suporte a quadras de tênis com slots personalizados por duração e capacidade.',
+    nameKey: 'landing.courts.tennis.name',
+    descriptionKey: 'landing.courts.tennis.description',
     icon: 'TENNIS',
     image: tennisImg
   },
   {
     id: 'beach-tennis',
-    name: 'Beach Tennis',
-    description: 'Administre quadras de beach tennis com agendamento online para seus jogadores.',
+    nameKey: 'landing.courts.beachTennis.name',
+    descriptionKey: 'landing.courts.beachTennis.description',
     icon: 'BEACH_TENNIS',
-    image: multisportImg
+    image: beachTennisImg
   }
-
 ]
