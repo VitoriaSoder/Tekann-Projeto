@@ -47,8 +47,10 @@ const bookingSlice = createSlice({
     },
     setLista: function (state, action: PayloadAction<Booking[]>) {
       state.lista = action.payload;
-      state.total = action.payload.length;
       state.load = false;
+    },
+    setTotal: function (state, action: PayloadAction<number>) {
+      state.total = action.payload;
     },
     setError: function (state, action: PayloadAction<string>) {
       state.error = action.payload;
@@ -63,6 +65,10 @@ const bookingSlice = createSlice({
       if (index !== -1) {
         state.lista[index] = action.payload;
       }
+    },
+    updateBookingStatus: function (state, action: PayloadAction<{ id: string; status: string }>) {
+      const booking = state.lista.find(function (b) { return b.id === action.payload.id; });
+      if (booking) booking.status = action.payload.status;
     },
     removeBookingFromList: function (state, action: PayloadAction<string>) {
       state.lista = state.lista.filter(function (b) { return b.id !== action.payload; });
@@ -79,9 +85,11 @@ const bookingSlice = createSlice({
 export const {
   setLoading,
   setLista,
+  setTotal,
   setError,
   addBooking,
   updateBookingInList,
+  updateBookingStatus,
   removeBookingFromList,
   setFilters,
   setPage,

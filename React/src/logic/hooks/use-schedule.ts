@@ -16,7 +16,7 @@ export function useSchedule() {
   const [selectedDate, setSelectedDate] = useState<Date>(new Date())
   useEffect(() => {
     getCourtsWorker(dispatch)
-    getBookingsWorker(dispatch)
+    getBookingsWorker(dispatch, { page: 1, limit: 1000 })
   }, [])
   const hours = useMemo(() => generateTimeSlots(8, 22, 60), [])
   const scheduleData: ScheduleDay = useMemo(() => {
@@ -30,7 +30,7 @@ export function useSchedule() {
         courtType: court.type as any,
         slots: hours.map(hour => {
           const isOccupied = dayBookings.some(
-            b => b.courtId === court.id && b.startTime <= hour && b.endTime > hour
+            b => b.courtId === court.id && b.startTime.substring(0, 5) <= hour && b.endTime.substring(0, 5) > hour
           )
           return { id: `${court.id}-${hour}`, time: hour, status: isOccupied ? ("OCCUPIED" as const) : ("AVAILABLE" as const) }
         }),
@@ -53,7 +53,7 @@ export function useSchedule() {
           courtType: court.type as any,
           slots: hours.map(hour => {
             const isOccupied = dayBookings.some(
-              b => b.courtId === court.id && b.startTime <= hour && b.endTime > hour
+              b => b.courtId === court.id && b.startTime.substring(0, 5) <= hour && b.endTime.substring(0, 5) > hour
             )
             return { id: `${court.id}-${dateStr}-${hour}`, time: hour, status: isOccupied ? ("OCCUPIED" as const) : ("AVAILABLE" as const) }
           }),
@@ -80,7 +80,7 @@ export function useSchedule() {
       courts.forEach(court => {
         hours.forEach(hour => {
           const isOccupied = dayBookings.some(
-            b => b.courtId === court.id && b.startTime <= hour && b.endTime > hour
+            b => b.courtId === court.id && b.startTime.substring(0, 5) <= hour && b.endTime.substring(0, 5) > hour
           )
           if (isOccupied) { occupied++ } else { available++ }
         })

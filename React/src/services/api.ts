@@ -1,5 +1,5 @@
 import { getCookie } from "@/helpers/cookie-utils"
-const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5000/api"
+const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5002/api"
 export type ApiCallback = (result: any, error?: any) => void
 export interface RequestConfig {
   method: "GET" | "POST" | "PUT" | "DELETE" | "PATCH"

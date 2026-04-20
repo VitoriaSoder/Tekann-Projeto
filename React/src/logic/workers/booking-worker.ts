@@ -2,9 +2,10 @@ import { apiGet, apiPost, apiDelete, apiPatch, ApiCallback } from "../../service
 import {
   setLoading,
   setLista,
+  setTotal,
   setError,
   addBooking,
-  updateBookingInList,
+  updateBookingStatus,
   removeBookingFromList
 } from "../store/slices/booking-slice";
 import type { AppDispatch } from "../store";
@@ -22,8 +23,9 @@ export function getBookingsWorker(
       return;
     }
     const data = result.data || result;
-    const total = result.total || (Array.isArray(result) ? result.length : 0);
+    const total = result.total ?? (Array.isArray(result) ? result.length : 0);
     dispatch(setLista(data));
+    dispatch(setTotal(total));
     if (callback) callback(result, undefined);
   });
 }
@@ -61,7 +63,7 @@ export function patchBookingStatusWorker(id: string, status: string, dispatch: A
       if (callback) callback(undefined, error);
       return;
     }
-    dispatch(updateBookingInList(result));
+    dispatch(updateBookingStatus({ id, status }));
     dispatch(setLoading(false));
     if (callback) callback(result, undefined);
   });
