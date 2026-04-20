@@ -105,6 +105,10 @@ export function CourtFormModal() {
                           <SelectItem value="Padel" className="rounded-lg cursor-pointer">Padel</SelectItem>
                           <SelectItem value="Tennis" className="rounded-lg cursor-pointer">Tênis</SelectItem>
                           <SelectItem value="Beach Tennis" className="rounded-lg cursor-pointer">Beach Tennis</SelectItem>
+                          <SelectItem value="Soccer" className="rounded-lg cursor-pointer">Futebol</SelectItem>
+                          <SelectItem value="Basketball" className="rounded-lg cursor-pointer">Basquete</SelectItem>
+                          <SelectItem value="Volleyball" className="rounded-lg cursor-pointer">Vôlei</SelectItem>
+                          <SelectItem value="Pickleball" className="rounded-lg cursor-pointer">Pickleball</SelectItem>
                         </SelectContent>
                       </Select>
                       <FormMessage className="text-destructive text-xs" />

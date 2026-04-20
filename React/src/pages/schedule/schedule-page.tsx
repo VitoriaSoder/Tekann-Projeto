@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { useSearchParams } from "react-router-dom"
-import { format } from "date-fns"
+import { format, addMinutes } from "date-fns"
 import { ptBR, enUS } from "date-fns/locale"
 import { useSchedule } from "@/logic/hooks/use-schedule"
 import { formatShortDate, getViewTitle } from "@/helpers/date-utils"
@@ -86,7 +86,12 @@ export default function SchedulePage() {
           <StatusBadge status={status} />
           {!isOccupied && (
             <ReservationModal
-              defaultValues={{ courtId: court.courtId }}
+              defaultValues={{
+                courtId: court.courtId,
+                date: selectedDate,
+                startTime: hour,
+                endTime: format(addMinutes(new Date(`1970-01-01T${hour}:00`), 60), "HH:mm"),
+              }}
               trigger={
                 <button className="h-7 w-7 rounded-full opacity-100 md:opacity-0 md:group-hover/slot:opacity-100 transition-opacity bg-neutral-900 text-[#ccf32f] flex items-center justify-center hover:bg-black shadow-md">
                   <span className="text-lg leading-none font-bold">+</span>
@@ -187,7 +192,7 @@ export default function SchedulePage() {
               </Popover>
             )}
           </div>
-  
+
           <div className="flex items-center gap-3">
             <ViewToggle value={viewMode} onChange={setViewMode} />
             {viewMode === "day" && (

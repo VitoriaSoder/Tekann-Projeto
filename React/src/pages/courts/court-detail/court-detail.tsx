@@ -136,27 +136,12 @@ export default function CourtDetail() {
             key={selectedTime?.start}
             open={isModalOpen}
             onOpenChange={setIsModalOpen}
-            defaultValues={{ 
-              courtId: court.id, 
+            defaultValues={{
+              courtId: court.id,
               date: new Date(),
               startTime: selectedTime?.start,
               endTime: selectedTime?.end
             }}
-            trigger={
-              <Button
-                className="w-full h-14 rounded-2xl bg-primary text-black font-black uppercase tracking-widest hover:bg-primary/90 hover:scale-[1.02] transition-all shadow-xl shadow-primary/10"
-              >
-                {selectedTime ? (
-                  <Text 
-                    as="span" 
-                    className="text-sm text-black"
-                    tKey={["reservations:book_for", selectedTime.start]}
-                  />
-                ) : (
-                  <Text variant="bold" tKey="reservations:select_time" as="span" className="text-sm text-black" />
-                )}
-              </Button>
-            }
           />
         </Box>
       </Box>
