@@ -23,12 +23,17 @@ public class BookingsController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<BookingDto>>> GetAll()
+    public async Task<ActionResult<PagedResult<BookingDto>>> GetAll(
+        [FromQuery] string? search = null,
+        [FromQuery] int page = 1,
+        [FromQuery] int limit = 10,
+        [FromQuery] string? sortBy = null,
+        [FromQuery] string? order = null)
     {
         var userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier) ?? Guid.Empty.ToString());
         var role = User.FindFirstValue(ClaimTypes.Role) ?? RoleConstants.User;
 
-        var result = await _bookingService.GetAllAsync(userId, role);
+        var result = await _bookingService.GetAllAsync(userId, role, search, page, limit, sortBy, order);
         return Ok(result);
     }
 
@@ -59,12 +64,12 @@ public class BookingsController : ControllerBase
     }
 
     [HttpPatch("{id}/status")]
-    public async Task<IActionResult> UpdateStatus(Guid id, [FromBody] string status)
+    public async Task<IActionResult> UpdateStatus(Guid id, [FromBody] UpdateBookingStatusDto dto)
     {
         var userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier) ?? Guid.Empty.ToString());
         var role = User.FindFirstValue(ClaimTypes.Role) ?? RoleConstants.User;
 
-        await _bookingService.UpdateStatusAsync(id, status, userId, role);
+        await _bookingService.UpdateStatusAsync(id, dto.Status, userId, role);
         return NoContent();
     }
 

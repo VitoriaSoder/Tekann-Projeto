@@ -7,7 +7,7 @@ namespace Application.Application.Bookings;
 
 public interface IBookingService
 {
-    Task<IEnumerable<BookingDto>> GetAllAsync(Guid userId, string role);
+    Task<PagedResult<BookingDto>> GetAllAsync(Guid userId, string role, string? search, int page, int limit, string? sortBy, string? order);
     Task<BookingDto?> GetByIdAsync(Guid id, Guid userId, string role);
     Task<IEnumerable<BookingDto>> GetByCourtAndDateAsync(Guid courtId, DateTime date);
     Task<BookingDto> CreateAsync(CreateBookingDto dto, Guid userId);

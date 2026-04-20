@@ -24,16 +24,42 @@ public class BookingService : IBookingService
         _logger = logger;
     }
 
-    public async Task<IEnumerable<BookingDto>> GetAllAsync(Guid userId, string role)
+    public async Task<PagedResult<BookingDto>> GetAllAsync(Guid userId, string role, string? search, int page, int limit, string? sortBy, string? order)
     {
+        _logger.LogInformation("[GetAll] search={Search} page={Page} limit={Limit} sortBy={SortBy} order={Order}", search, page, limit, sortBy, order);
+        IEnumerable<Booking> bookings;
+
         if (role == RoleConstants.Admin)
+            bookings = await _bookingRepository.GetAllByAdminAsync(userId);
+        else
+            bookings = await _bookingRepository.GetAllByUserAsync(userId);
+
+        if (!string.IsNullOrWhiteSpace(search))
         {
-            var adminBookings = await _bookingRepository.GetAllByAdminAsync(userId);
-            return adminBookings.Select(MapToDto);
+            var term = search.ToLower();
+            bookings = bookings.Where(b =>
+                b.ClientName.ToLower().Contains(term) ||
+                (b.Court?.Name ?? "").ToLower().Contains(term) ||
+                b.Status.ToLower().Contains(term));
         }
 
-        var userBookings = await _bookingRepository.GetAllByUserAsync(userId);
-        return userBookings.Select(MapToDto);
+        bookings = (sortBy?.ToLower(), order?.ToLower()) switch
+        {
+            ("clientname", "desc") => bookings.OrderByDescending(b => b.ClientName),
+            ("clientname", _)      => bookings.OrderBy(b => b.ClientName),
+            ("date", "desc")       => bookings.OrderByDescending(b => b.Date),
+            ("date", _)            => bookings.OrderBy(b => b.Date),
+            ("status", "desc")     => bookings.OrderByDescending(b => b.Status),
+            ("status", _)          => bookings.OrderBy(b => b.Status),
+            ("courtname", "desc")  => bookings.OrderByDescending(b => b.Court?.Name),
+            ("courtname", _)       => bookings.OrderBy(b => b.Court?.Name),
+            _                      => bookings.OrderByDescending(b => b.Date)
+        };
+
+        var total = bookings.Count();
+        var data = bookings.Skip((page - 1) * limit).Take(limit).Select(MapToDto);
+
+        return new PagedResult<BookingDto> { Data = data, Total = total, Page = page, Limit = limit };
     }
 
     public async Task<BookingDto?> GetByIdAsync(Guid id, Guid userId, string role)
