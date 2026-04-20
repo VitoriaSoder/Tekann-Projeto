@@ -31,11 +31,12 @@ A arquitetura foi dividida para garantir a separação de responsabilidades (SoC
 - Banco de dados SQL Server (ou Docker instalado para subir o container).
 
 ### Configurando a Infraestrutura (Banco de Dados)
-O projeto fornece um arquivo `docker-compose.yml` na raiz da API para facilitar o ambiente local:
+O projeto fornece um arquivo `docker-compose.yml` na raiz do repositório. Coloque o arquivo `.env` fornecido na raiz (`Tekann-Projeto/.env`) e suba o banco:
 ```bash
-# Na pasta principal (API):
+# Na raiz do repositório (Tekann-Projeto):
 docker-compose up -d
 ```
+> **Permissão Docker (Linux):** Se receber "permission denied", rode `sudo usermod -aG docker $USER && newgrp docker` e tente novamente.
 
 As tabelas (Migrations) serão criadas e aplicadas automaticamente assim que a API rodar a primeira vez (devido à injeção no `Program.cs`), ou você pode aplicar manualmente:
 ```bash
@@ -45,16 +46,16 @@ dotnet ef database update --startup-project ../../Gateway/WebAPI
 
 ### Inicializando a API
 ```bash
-cd Gateway/WebAPI
-dotnet run
+# Na pasta principal (API):
+dotnet run --project Gateway/WebAPI/WebAPI.csproj
 ```
-A API iniciará. Você pode testar os endpoints acessando o **Swagger** no navegador (normalmente em `https://localhost:7198/swagger`).
+A API iniciará. Você pode testar os endpoints acessando o **Swagger** no navegador em `http://localhost:5002/swagger`.
 
 ---
 
 ## 🧪 Como rodar os Testes Automatizados
 
-A aplicação possui uma bateria completa com **64 testes automatizados**, cobrindo desde unidades isoladas de negócio até requisições HTTP ponta a ponta.
+A aplicação possui testes automatizados cobrindo desde unidades isoladas de negócio até requisições HTTP ponta a ponta.
 
 Para executá-los, basta abrir o terminal na pasta principal (`API`) e rodar:
 ```bash

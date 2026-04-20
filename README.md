@@ -40,7 +40,13 @@ O **SportsCourt** é uma plataforma completa para gestão de quadras, agendament
 ### Pré-requisitos
 - [.NET 9 SDK](https://dotnet.microsoft.com/download)
 - [Node.js](https://nodejs.org/) (v18+)
-- [Docker](https://www.docker.com/) (para o banco de dados)
+- [Docker](https://www.docker.com/) + Docker Compose
+
+> **Permissão Docker (Linux):** Se receber "permission denied" ao usar Docker, rode os comandos abaixo e abra um novo terminal:
+> ```bash
+> sudo usermod -aG docker $USER
+> newgrp docker
+> ```
 
 ### 1. Clonar o repositório
 ```bash
@@ -49,43 +55,41 @@ cd Tekann-Projeto
 ```
 
 ### 2. Configurar variáveis de ambiente
-```bash
-cp .env.example .env
-```
-Edite o `.env` e defina uma senha para o banco. Os valores padrão já funcionam para desenvolvimento.
+
+Coloque o arquivo `.env` fornecido na raiz do projeto (`Tekann-Projeto/.env`).
 
 ### 3. Subir o banco de dados
 ```bash
-docker compose up -d
+docker-compose up -d
 ```
 > O SQL Server ficará disponível em `localhost:1433`.
 
 ### 4. Rodar a API
+Em um terminal na pasta `Tekann-Projeto`:
 ```bash
 cd API
 dotnet restore
 dotnet run --project Gateway/WebAPI/WebAPI.csproj
 ```
-> A API estará disponível em: `http://localhost:5000`
+> API disponível em: `http://localhost:5002`
+> Swagger em: `http://localhost:5002/swagger`
 
 ### 5. Rodar o Frontend
-Em outro terminal:
+Em **outro terminal**, na pasta `Tekann-Projeto`:
 ```bash
 cd React
 npm install
 npm run dev
 ```
-> O frontend estará disponível em: `http://localhost:5173`
+> Frontend disponível em: `http://localhost:5173`
 
 ---
 
 ## 🧪 Testes
 
-O projeto possui uma suíte completa de testes automatizados (Unidade e Integração).
-
 ```bash
 cd API
-dotnet test
+dotnet test API.sln
 ```
 
 ---
@@ -94,7 +98,7 @@ dotnet test
 
 Para subir o ambiente completo (Banco + API + Frontend) em modo produção:
 ```bash
-docker compose -f docker-compose.prod.yml up -d --build
+docker-compose -f docker-compose.prod.yml up -d --build
 ```
 
 ---
