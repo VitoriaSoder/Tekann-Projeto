@@ -143,7 +143,12 @@ export function DashboardCharts({ data }: DashboardChartsProps) {
                 dataKey="name" 
                 axisLine={false} 
                 tickLine={false} 
-                tick={{ fill: "var(--muted-foreground)", fontSize: 10, fontWeight: 800, transform: 'uppercase' }}
+                tick={{
+                  fill: "var(--muted-foreground)",
+                  fontSize: 10,
+                  fontWeight: 800,
+                  style: { textTransform: "uppercase" },
+                }}
                 dy={15}
               />
               <YAxis 

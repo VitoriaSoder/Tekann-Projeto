@@ -96,6 +96,7 @@ export default function ReservationPage() {
           </div>
         ) : (
           reservations.map((reservation) => (
+            
             <div
               key={reservation.id}
               className="bg-card p-5 rounded-[24px] border border-border hover:border-primary/50 shadow-sm hover:shadow-md transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-4 group"
@@ -120,12 +121,12 @@ export default function ReservationPage() {
                 </div>
               </div>
               <div className="flex items-center gap-3 mt-4 sm:mt-0 pt-4 sm:pt-0 border-t border-border sm:border-0 justify-between sm:justify-end min-w-[160px]">
-                <StatusBadge status={reservation.status === "ACTIVE" ? "OCCUPIED" : "AVAILABLE"}>
+                <StatusBadge status={reservation.status === "ACTIVE" ? "OCCUPIED" : "AVAILABLE"} className={reservation.status === "ACTIVE" ? "bg-primary" : "bg-destructive"}>
                   <Text 
                     variant="bold" 
                     tKey={reservation.status === "ACTIVE" ? "reservations:active" : "reservations:cancelled"} 
                     as="span" 
-                    className="text-[10px]"
+                    className="text-[10px] text-black"
                   />
                 </StatusBadge>
                 {reservation.status === "ACTIVE" && (

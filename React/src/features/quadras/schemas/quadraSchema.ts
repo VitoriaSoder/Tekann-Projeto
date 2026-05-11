@@ -1,7 +1,30 @@
 import { z } from "zod"
+
+export const COURT_TYPE_VALUES = [
+  "Padel",
+  "Tennis",
+  "Beach Tennis",
+  "soccer",
+  "Basketball",
+  "Volleyball",
+  "Pickleball",
+] as const
+
+export type CourtTypeValue = (typeof COURT_TYPE_VALUES)[number]
+
+export const COURT_TYPE_SELECT_OPTIONS: { label: string; value: CourtTypeValue }[] = [
+  { label: "Padel", value: "Padel" },
+  { label: "Tênis", value: "Tennis" },
+  { label: "Beach Tennis", value: "Beach Tennis" },
+  { label: "Futebol", value: "soccer" },
+  { label: "Basquete", value: "Basketball" },
+  { label: "Vôlei", value: "Volleyball" },
+  { label: "Pickleball", value: "Pickleball" },
+]
+
 export const quadraSchema = z.object({
   name: z.string().min(3, { message: "O nome deve ter pelo menos 3 caracteres." }),
-  type: z.enum(["Padle", "Tennis", "Beach Tennis"], {
+  type: z.enum(COURT_TYPE_VALUES, {
     message: "Selecione um tipo de quadra válido.",
   }),
   region: z.string().min(2, { message: "Informe a região da quadra." }),

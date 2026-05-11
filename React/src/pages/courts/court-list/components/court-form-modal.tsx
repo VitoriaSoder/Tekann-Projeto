@@ -7,7 +7,7 @@ import { Dialog, DialogContent, DialogTitle, DialogDescription, DialogFooter } f
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { quadraSchema, QuadraFormData } from "@/features/quadras/schemas/quadraSchema"
+import { COURT_TYPE_SELECT_OPTIONS, quadraSchema, QuadraFormData } from "@/features/quadras/schemas/quadraSchema"
 import { useCourts } from "@/logic/hooks/use-courts"
 import { toast } from "sonner"
 import { Box } from "@/components/common/box"
@@ -95,22 +95,21 @@ export function CourtFormModal() {
                       <FormLabel className="font-semibold">
                         <Text variant="bold" tKey="courts:type_label" as="span" className="text-sm" />
                       </FormLabel>
-                      <Select onValueChange={field.onChange} defaultValue={field.value}>
+                      <Select onValueChange={field.onChange} value={field.value}>
                         <FormControl>
                           <SelectTrigger className="rounded-xl h-11 bg-background border-border">
                             <SelectValue placeholder={t("common:select")} />
                           </SelectTrigger>
                         </FormControl>
                         <SelectContent className="rounded-xl">
-                          <SelectItem value="Padel" className="rounded-lg cursor-pointer">Padel</SelectItem>
-                          <SelectItem value="Tennis" className="rounded-lg cursor-pointer">Tênis</SelectItem>
-                          <SelectItem value="Beach Tennis" className="rounded-lg cursor-pointer">Beach Tennis</SelectItem>
-                          <SelectItem value="Soccer" className="rounded-lg cursor-pointer">Futebol</SelectItem>
-                          <SelectItem value="Basketball" className="rounded-lg cursor-pointer">Basquete</SelectItem>
-                          <SelectItem value="Volleyball" className="rounded-lg cursor-pointer">Vôlei</SelectItem>
-                          <SelectItem value="Pickleball" className="rounded-lg cursor-pointer">Pickleball</SelectItem>
+                          {COURT_TYPE_SELECT_OPTIONS.map(item => (
+                            <SelectItem key={item.value} value={item.value} className="rounded-lg cursor-pointer">
+                              {item.label}
+                            </SelectItem>
+                          ))}
                         </SelectContent>
                       </Select>
+                 
                       <FormMessage className="text-destructive text-xs" />
                     </FormItem>
                   )}
@@ -189,6 +188,7 @@ export function CourtFormModal() {
                             <SelectValue placeholder={t("common:select")} />
                           </SelectTrigger>
                         </FormControl>
+                        
                         <SelectContent className="rounded-xl">
                           <SelectItem value="30" className="rounded-lg cursor-pointer">30 {t("common:minutes")}</SelectItem>
                           <SelectItem value="60" className="rounded-lg cursor-pointer">60 {t("common:minutes")}</SelectItem>

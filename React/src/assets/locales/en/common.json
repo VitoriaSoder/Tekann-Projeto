@@ -42,6 +42,7 @@
   "Sex":"Friday",
   "Sab":"Saturday",
   "Dom":"Sunday",
+  "info_key.":"",
   "landing": {
     "hero": {
       "imageAlt": "Tennis player on court",

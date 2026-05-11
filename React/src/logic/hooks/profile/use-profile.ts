@@ -1,6 +1,8 @@
 import { useState } from "react"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
+import { useTranslation } from "react-i18next"
+
 import { toast } from "sonner"
 import { useNavigate } from "react-router-dom"
 import { profileSchema, ProfileFormData } from "@/features/profile/schemas/profile-schema"
@@ -18,6 +20,7 @@ export function useUpdateProfile() {
     resolver: zodResolver(profileSchema),
     defaultValues: { name: user?.name || "" },
   })
+  const { t } = useTranslation()
   const onSubmit = (data: ProfileFormData) => {
     setIsLoading(true)
     updateProfile({ name: data.name }, function (_result, error) {
@@ -29,12 +32,13 @@ export function useUpdateProfile() {
       if (user && token) {
         dispatch(setAuth({ user: { ...user, name: data.name }, token }))
       }
-      toast.success("Perfil atualizado com sucesso!")
+      toast.success(t("Perfil atualizado com sucesso!"))
     })
   }
   return { form, isLoading, onSubmit: form.handleSubmit(onSubmit) }
 }
 export function useUpdatePassword() {
+  const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
   const form = useForm<PasswordFormData>({
     resolver: zodResolver(passwordSchema),
@@ -45,16 +49,17 @@ export function useUpdatePassword() {
     updatePassword({ currentPassword: data.currentPassword, newPassword: data.newPassword }, function (_result, error) {
       setIsLoading(false)
       if (error) {
-        toast.error(error.msg || "Erro ao atualizar senha.")
+        toast.error(error.msg || t("error:error_update_key"))
         return
       }
-      toast.success("Senha atualizada com sucesso!")
+      toast.success(t("Senha atualizada com sucesso!"))
       form.reset()
     })
   }
   return { form, isLoading, onSubmit: form.handleSubmit(onSubmit) }
 }
 export function useDeleteAccount() {
+  const { t } = useTranslation()
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
   const [isLoading, setIsLoading] = useState(false)
@@ -63,13 +68,13 @@ export function useDeleteAccount() {
     deleteAccount(function (_result, error) {
       setIsLoading(false)
       if (error) {
-        toast.error(error.msg || "Erro ao remover conta.")
+        toast.error(error.msg || t("error:error_removing_account"))
         return
       }
       removeCookie("token")
       dispatch(clearAuth())
       navigate("/auth/login")
-      toast.success("Conta removida com sucesso.")
+      toast.success(t("Conta removida com sucesso."))
     })
   }
   return { isLoading, handleDelete }

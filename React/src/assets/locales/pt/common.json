@@ -42,6 +42,8 @@
   "admin": "Admin",
   "today": "Hoje",
   "tomorrow": "Amanhã",
+  "info_key.":"Informe a senha atual.",
+"confirm_key": "Confirme a nova senha.",
   "landing": {
     "hero": {
       "imageAlt": "Tenista em quadra",
