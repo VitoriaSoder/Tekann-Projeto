@@ -64,7 +64,7 @@ export function TimeSlotPicker({
             <Text variant="small" tKey="reservations:free" className="font-black uppercase tracking-widest text-muted-foreground text-[9px]" />
           </Box>
           <Box className="flex items-center gap-1.5">
-            <Box className="w-2.5 h-2.5 rounded-full bg-destructive/40" />
+            <Box className="w-2.5 h-2.5 rounded-full bg-destructive" />
             <Text variant="small" tKey="reservations:occupied" className="font-black uppercase tracking-widest text-muted-foreground text-[9px]" />
           </Box>
         </Box>
@@ -83,17 +83,17 @@ export function TimeSlotPicker({
               className={cn(
                 "h-10 rounded-xl text-xs font-bold transition-all border flex items-center justify-center relative overflow-hidden",
                 occupied
-                  ? "bg-destructive/5 border-destructive/10 text-destructive/40 cursor-not-allowed"
+                  ? "bg-destructive border-destructive/10 text-destructive/40 cursor-not-allowed"
                   : selected
                   ? "bg-primary text-black border-primary shadow-lg scale-[1.05] z-10"
                   : "bg-muted/30 border-border text-foreground hover:border-primary/50 hover:bg-primary/5 hover:scale-[1.02]"
               )}
             >
               {hour}
-              {occupied && (
+              {occupied && (       
                 <Box className="absolute inset-0 flex items-center justify-center rotate-45 pointer-events-none">
                    <Box className="w-full h-[1px] bg-destructive/20" />
-                </Box>
+                </Box>    
               )}
             </button>
           )

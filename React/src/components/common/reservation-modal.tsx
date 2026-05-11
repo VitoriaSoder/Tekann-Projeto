@@ -174,7 +174,7 @@ export function ReservationModal({
                 render={({ field }) => (
                   <FormItem className="md:col-span-2 flex flex-col">
                     <FormLabel className="mb-1">
-                      <Text variant="bold" tKey="reservations:date_label" className="text-foreground text-xs" />
+                      <Text variant="bold" tKey="reservations:date_label" className="text-foreground hover: text-xs" />
                     </FormLabel>
                     <Popover>
                       <PopoverTrigger asChild>

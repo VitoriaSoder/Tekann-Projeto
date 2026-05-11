@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { useSearchParams } from "react-router-dom"
 import { format, addMinutes } from "date-fns"
+import { useAppSelector } from "@/logic/store/hooks"
 import { ptBR, enUS } from "date-fns/locale"
 import { useSchedule } from "@/logic/hooks/use-schedule"
 import { formatShortDate, getViewTitle } from "@/helpers/date-utils"
@@ -37,6 +38,10 @@ export default function SchedulePage() {
   const handleDesktopDateSelect = (date: Date | undefined) => {
     if (date) { actions.selectDate(date); setIsDesktopCalendarOpen(false) }
   }
+
+const user = useAppSelector(s => s.auth.user)
+const isAdmin = user?.role === "ADMIN"
+
   const handleExportCSV = () => {
     const dataToExport = prepareScheduleDataForExport(scheduleData.grid, selectedDate, dateLocale)
     exportToCSV(dataToExport, `agenda-${format(selectedDate, "EEE, dd MMM", { locale: dateLocale })}`)
@@ -122,7 +127,7 @@ export default function SchedulePage() {
   return (
     <PageLayout
       titleKey="schedule:title"
-      descriptionKey="schedule:description"
+      descriptionKey={isAdmin ? "schedule:description" : "schedule:description_user"}
       maxWidth="xl"
     >
       <div className="mb-4 md:mb-6 mt-1 md:mt-2">

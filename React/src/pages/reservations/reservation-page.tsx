@@ -53,10 +53,13 @@ export default function ReservationPage() {
     })
   }
   const totalPages = Math.ceil(total / filters.limit)
+  const user = useAppSelector(s => s.auth.user)
+  const isAdmin = user?.role === "ADMIN"
+
   return (
     <PageLayout
       titleKey="reservations:title"
-      descriptionKey="reservations:description"
+      descriptionKey={isAdmin ? "reservations:description" : "reservations:description_user"}
       maxWidth="md"
       actions={<ReservationModal />}
     >
@@ -71,17 +74,18 @@ export default function ReservationPage() {
           />
         </div>
         <div className="flex gap-2">
-          <Button variant="outline" size="sm" onClick={() => handleSort("date")} className="rounded-full">
+          <Button variant="outline" size="sm" onClick={() => handleSort("date")} className="rounded-full hover:text-muted-foreground">
             <ArrowUpDown className="w-4 h-4 mr-2" />
-            <Text variant="bold" tKey="reservations:date" as="span" className="text-xs" />
+            <Text variant="bold" tKey="reservations:date" as="span" className="text-xs text-foreground" />
           </Button>
-          <Button variant="outline" size="sm" onClick={() => handleSort("clientName")} className="rounded-full">
+          <Button variant="outline" size="sm" onClick={() => handleSort("clientName")} className="rounded-full hover:text-muted-foreground">
             <ArrowUpDown className="w-4 h-4 mr-2" />
-            <Text variant="bold" tKey="reservations:client" as="span" className="text-xs" />
+            <Text variant="bold" tKey="reservations:client" as="span" className="text-xs text-foreground" />
           </Button>
         </div>
       </div>
       <div className="grid gap-4">
+
         {isLoading ? (
           Array.from({ length: 5 }).map((_, i) => <ReservationSkeleton key={i} />)
         ) : reservations.length === 0 ? (

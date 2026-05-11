@@ -2,6 +2,7 @@
   "title": "Sua Arena em Tempo Real",
   "description": "Interface intuitiva desenhada para gestores. Controle total de quadras, agendamentos e reservas em um único painel.",
   "subtitle": "Agenda dos próximos 30 dias",
+  "description_user": "Gerencie suas reservas e locações de forma simples e eficiente.",
   "confirmed_booking": "Reserva Confirmada",
   "players_count": "{{count}} Jogadores",
   "available": "Disponível",

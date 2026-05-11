@@ -1,6 +1,7 @@
 {
   "title": "Reservas e Locações",
   "description": "Gerencie os agendamentos das quadras do complexo esportivo.",
+  "description_user":"Gerencie suas reservas e locações de forma simples e eficiente.",
   "no_reservations": "Nenhuma reserva encontrada",
   "confirmed_appear_here": "Os agendamentos confirmados aparecerão aqui.",
   "export_csv": "Exportar CSV",

@@ -10,11 +10,10 @@ import {
   PieChart,
   Pie,
   Cell,
-  Legend,
 } from "recharts"
 import { useTranslation } from "react-i18next"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { cn } from "@/lib/utils"
+import { Text } from "@/components/common/text"
 interface DashboardChartsProps {
   data: any[]
 }
@@ -32,13 +31,17 @@ const CustomTooltip = ({ active, payload, label }: any) => {
         <p className="text-xs font-black uppercase tracking-widest text-muted-foreground mb-1">{label}</p>
         <p className="text-lg font-black text-foreground flex items-center gap-2">
           {payload[0].value} 
-          <span className="text-[10px] text-muted-foreground font-medium uppercase tracking-tighter">Reservas</span>
+          <Text variant="small" tKey="dashboard:reservations" as="span" className="text-muted-foreground">
+            Reservas
+          </Text>
         </p>
       </div>
     )
   }
   return null
 }
+
+
 export function DashboardCharts({ data }: DashboardChartsProps) {
   const { t } = useTranslation()
   const courtOccupancy = React.useMemo(() => {
@@ -50,6 +53,7 @@ export function DashboardCharts({ data }: DashboardChartsProps) {
       .map(([name, value]) => ({ name, value }))
       .sort((a, b) => b.value - a.value)
   }, [data])
+
   const weekdayData = React.useMemo(() => {
     const weekdays = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"]
     const counts: Record<string, number> = {}
@@ -59,6 +63,7 @@ export function DashboardCharts({ data }: DashboardChartsProps) {
     })
     return weekdays.map((name) => ({ name, value: counts[name] || 0 }))
   }, [data])
+
   const timeData = React.useMemo(() => {
     const counts: Record<string, number> = {}
     data.forEach((booking) => {
@@ -138,7 +143,7 @@ export function DashboardCharts({ data }: DashboardChartsProps) {
                 dataKey="name" 
                 axisLine={false} 
                 tickLine={false} 
-                tick={{ fill: "var(--muted-foreground)", fontSize: 10, fontWeight: 800, textTransform: 'uppercase' }}
+                tick={{ fill: "var(--muted-foreground)", fontSize: 10, fontWeight: 800, transform: 'uppercase' }}
                 dy={15}
               />
               <YAxis 

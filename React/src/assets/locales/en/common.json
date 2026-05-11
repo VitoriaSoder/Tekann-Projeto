@@ -35,6 +35,13 @@
   "admin": "Admin",
   "today": "Today",
   "tomorrow": "Tomorrow",
+  "Seg":"Monday",
+  "Ter":"Tuesday",
+  "Qua":"Wednesday",
+  "Qui":"Thursday",
+  "Sex":"Friday",
+  "Sab":"Saturday",
+  "Dom":"Sunday",
   "landing": {
     "hero": {
       "imageAlt": "Tennis player on court",
