@@ -53,7 +53,7 @@ export function CancelReservationModal({
             <Box className="text-center mt-2">
               <Text variant="muted" tKey="reservations:cancel_confirmation" as="span" />
               <br />
-              <Text variant="bold" className="text-foreground mt-1" as="span">{clientName}</Text>
+              <Text variant="bold"  as="span">{clientName}</Text>
             </Box>
           </DialogDescription>
         </DialogHeader>
@@ -70,7 +70,7 @@ export function CancelReservationModal({
             <Text tKey="common:cancel" as="span" />
           </Button>
           <Button variant="destructive" onClick={handleConfirm} className="rounded-full font-bold px-8 shadow-lg shadow-destructive/20">
-            <Text tKey="common:confirm" as="span" />
+            <Text tKey="common:confirm" as="span" variant="none" />
           </Button>
         </DialogFooter>
       </DialogContent>

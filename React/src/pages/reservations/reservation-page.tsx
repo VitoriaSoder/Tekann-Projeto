@@ -138,7 +138,7 @@ export default function ReservationPage() {
                   <Button
                     variant="ghost"
                     size="icon"
-                    className="text-muted-foreground hover:text-red-500 rounded-full"
+                    className="text-muted-foreground hover:text-red-500 hover:bg-red-500/10 rounded-full"
                     onClick={() => setCancelModal({ isOpen: true, id: reservation.id, name: reservation.clientName })}
                   >
                     <XCircle className="w-5 h-5" />
