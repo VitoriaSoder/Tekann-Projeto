@@ -21,15 +21,25 @@ function resolveErrorMessage(error: any): string {
     const first = Object.values(error.data.errors as Record<string, string[]>)[0]
     if (Array.isArray(first) && first.length > 0) return first[0]
   }
+  
+  const status: Record<number, string> = {
+    0: "error:network_error",
+    400: "error:invalid_data",
+    401: "error:invalid_credentials",
+    409: "error:email_taken",
+    500: "error:internal_error",
+  }
+
   if (error.data?.msg) return error.data.msg
   if (error.msg) return error.msg
-  if (error.status === 0) return i18n.t("error:network_error")
-  if (error.status === 400) return i18n.t("error:invalid_data")
-  if (error.status === 401) return i18n.t("error:invalid_credentials")
-  if (error.status === 409) return i18n.t("error:email_taken")
-  if (error.status === 500) return i18n.t("error:internal_error")
+  if (error.status in status  ) return i18n.t(status[error.status as keyof typeof status])
   return i18n.t("error:request_error")
 }
+
+
+
+
+
 export function useAuthLogin() {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()

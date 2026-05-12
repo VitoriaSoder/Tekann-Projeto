@@ -1,5 +1,5 @@
-import { format, addDays, subDays, isSameDay } from "date-fns"
-import { ptBR } from "date-fns/locale"
+import { format,  isSameDay } from "date-fns"
+
 import { ViewMode } from "@/components/common/view-toggle"
 
 export function getViewTitle(view: ViewMode, selectedDate: Date, weekDays: Date[], t: any, locale: any): string {

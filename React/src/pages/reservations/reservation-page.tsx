@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { useReservations } from "@/logic/hooks/use-reservations"
 import { useAppSelector } from "@/logic/store/hooks"
 import { format } from "date-fns"
-import { ptBR } from "date-fns/locale"
+import { ptBR, enUS } from "date-fns/locale"
 import { CalendarIcon, MapPin, Clock, Search, XCircle, ArrowUpDown, ChevronLeft, ChevronRight } from "lucide-react"
 import { ReservationModal } from "@/components/common/reservation-modal"
 import { StatusBadge } from "@/components/common/status-badge"
@@ -17,6 +17,8 @@ import { PageLayout } from "@/components/common/page-layout"
 import { toast } from "sonner"
 
 export default function ReservationPage() {
+  const { i18n } = useTranslation()
+  const dateLocale = i18n.language === "en" ? enUS : ptBR
   const {
     reservations,
     isLoading,
@@ -37,10 +39,7 @@ export default function ReservationPage() {
   useEffect(() => {
     getBookings()
   }, [filters])
-  const getCourtName = (courtId: string) => {
-    const court = courts.find(c => c.id === courtId)
-    return court?.name || courtId
-  }
+
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFilters({ search: e.target.value, page: 1 })
   }
@@ -119,7 +118,7 @@ export default function ReservationPage() {
                 <div className="flex flex-row md:flex-col items-center md:items-start gap-4 md:gap-1 mt-2 md:mt-0">
                   <div className="flex items-center text-sm font-medium text-foreground gap-1.5 bg-muted/50 px-3 py-1.5 rounded-full border border-border">
                     <CalendarIcon className="w-4 h-4 opacity-70" />
-                    {format(reservation.date, "dd 'de' MMM, yyyy", { locale: ptBR })}
+                    {format(reservation.date, dateLocale.code === 'pt-BR' ? "dd 'de' MMM, yyyy" : "MMM dd, yyyy", { locale: dateLocale })}
                   </div>
                   <div className="flex items-center text-sm font-medium text-foreground gap-1.5 bg-muted/50 px-3 py-1.5 rounded-full border border-border">
                     <Clock className="w-4 h-4 opacity-70 text-primary" />

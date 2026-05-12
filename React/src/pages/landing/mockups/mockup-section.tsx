@@ -1,4 +1,3 @@
-import { useTranslation } from 'react-i18next'
 import { Box } from '@/components/common/box'
 import { Container } from '@/components/common/container'
 import { Heading } from '@/components/common/heading'
@@ -7,7 +6,7 @@ import dashboardImg from '@/assets/images/dashboard-mockup.webp'
 import mobileImg from '@/assets/images/mobile-mockup.webp'
 
 export function MockupSection() {
-  const { t } = useTranslation()
+
 
   return (
     <Box className="py-24 bg-muted/30 overflow-hidden">
