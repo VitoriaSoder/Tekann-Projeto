@@ -1,4 +1,4 @@
-import * as React from "react"
+import * as React from "react";
 import {
   BarChart,
   Bar,
@@ -10,71 +10,86 @@ import {
   PieChart,
   Pie,
   Cell,
-} from "recharts"
-import { useTranslation } from "react-i18next"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Text } from "@/components/common/text"
+} from "recharts";
+import { useTranslation } from "react-i18next";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Text } from "@/components/common/text";
 interface DashboardChartsProps {
-  data: any[]
+  data: any[];
 }
 const COLORS = [
   "hsl(72 89% 57%)",
   "hsl(0 0% 9%)",
   "hsl(0 0% 45%)",
-  "hsl(210 40% 96%)"
-]
+  "hsl(210 40% 96%)",
+];
 
 const CustomTooltip = ({ active, payload, label }: any) => {
   if (active && payload && payload.length) {
     return (
       <div className="bg-background/90 backdrop-blur-xl border border-border p-4 rounded-2xl shadow-2xl">
-        <p className="text-xs font-black uppercase tracking-widest text-muted-foreground mb-1">{label}</p>
+        <p className="text-xs font-black uppercase tracking-widest text-muted-foreground mb-1">
+          {label}
+        </p>
         <p className="text-lg font-black text-foreground flex items-center gap-2">
-          {payload[0].value} 
-          <Text variant="small" tKey="dashboard:reservations" as="span" className="text-muted-foreground">
+          {payload[0].value}
+          <Text
+            variant="small"
+            tKey="dashboard:reservations"
+            as="span"
+            className="text-muted-foreground"
+          >
             Reservas
           </Text>
         </p>
       </div>
-    )
+    );
   }
-  return null
-}
-
+  return null;
+};
 
 export function DashboardCharts({ data }: DashboardChartsProps) {
-  const { t } = useTranslation()
+  const { t } = useTranslation();
   const courtOccupancy = React.useMemo(() => {
-    const counts: Record<string, number> = {}
+    const counts: Record<string, number> = {};
     data.forEach((booking) => {
-      counts[booking.courtName] = (counts[booking.courtName] || 0) + 1
-    })
+      counts[booking.courtName] = (counts[booking.courtName] || 0) + 1;
+    });
     return Object.entries(counts)
       .map(([name, value]) => ({ name, value }))
-      .sort((a, b) => b.value - a.value)
-  }, [data])
+      .sort((a, b) => b.value - a.value);
+  }, [data]);
 
   const weekdayData = React.useMemo(() => {
-    const weekdays = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"]
-    const counts: Record<string, number> = {}
+    const weekdays = [
+      t("dashboard:weekdays.sun"),
+      t("dashboard:weekdays.mon"),
+      t("dashboard:weekdays.tue"),
+      t("dashboard:weekdays.wed"),
+      t("dashboard:weekdays.thu"),
+      t("dashboard:weekdays.fri"),
+      t("dashboard:weekdays.sat"),
+    ];
+    const counts: Record<string, number> = {};
     data.forEach((booking) => {
-      const day = new Date(booking.date).getDay()
-      counts[weekdays[day]] = (counts[weekdays[day]] || 0) + 1
-    })
-    return weekdays.map((name) => ({ name, value: counts[name] || 0 }))
-  }, [data])
+      const day = new Date(booking.date).getDay();
+      counts[weekdays[day]] = (counts[weekdays[day]] || 0) + 1;
+    });
+    return weekdays.map((name) => ({ name, value: counts[name] || 0 }));
+  }, [data, t]);
 
   const timeData = React.useMemo(() => {
-    const counts: Record<string, number> = {}
+    const counts: Record<string, number> = {};
     data.forEach((booking) => {
-      counts[booking.startTime] = (counts[booking.startTime] || 0) + 1
-    })
+      counts[booking.startTime] = (counts[booking.startTime] || 0) + 1;
+    });
     return Object.entries(counts)
       .map(([name, value]) => ({ name, value }))
       .sort((a, b) => b.value - a.value)
-      .slice(0, 5)
-  }, [data])
-  if (data.length === 0) return null
+      .slice(0, 5);
+  }, [data]);
+  if (data.length === 0) return null;
+
   return (
     <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-12 mt-12 mb-12">
       <Card className="lg:col-span-4 rounded-[40px] border-border shadow-2xl shadow-black/5 bg-card/50 backdrop-blur-sm overflow-hidden flex flex-col">
@@ -97,9 +112,9 @@ export function DashboardCharts({ data }: DashboardChartsProps) {
                 stroke="none"
               >
                 {courtOccupancy.map((entry, index) => (
-                  <Cell 
-                    key={`cell-${index}`} 
-                    fill={COLORS[index % COLORS.length]} 
+                  <Cell
+                    key={`cell-${index}`}
+                    fill={COLORS[index % COLORS.length]}
                     className="hover:opacity-80 transition-opacity cursor-pointer outline-none"
                   />
                 ))}
@@ -108,18 +123,25 @@ export function DashboardCharts({ data }: DashboardChartsProps) {
             </PieChart>
           </ResponsiveContainer>
           <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-            <span className="text-4xl font-black text-foreground leading-none">{data.length}</span>
-            <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest mt-1">Total</span>
+            <span className="text-4xl font-black text-foreground leading-none">
+              {data.length}
+            </span>
+            <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest mt-1">
+              Total
+            </span>
           </div>
           <div className="flex flex-wrap justify-center gap-x-4 gap-y-2 px-4 pb-4">
-             {courtOccupancy.slice(0, 3).map((entry, index) => (
-                <div key={entry.name} className="flex items-center gap-1.5">
-                  <div className="w-2 h-2 rounded-full" style={{ backgroundColor: COLORS[index % COLORS.length] }} />
-                  <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-tighter truncate max-w-[80px]">
-                    {entry.name}
-                  </span>
-                </div>
-              ))}
+            {courtOccupancy.slice(0, 3).map((entry, index) => (
+              <div key={entry.name} className="flex items-center gap-1.5">
+                <div
+                  className="w-2 h-2 rounded-full"
+                  style={{ backgroundColor: COLORS[index % COLORS.length] }}
+                />
+                <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-tighter truncate max-w-[80px]">
+                  {entry.name}
+                </span>
+              </div>
+            ))}
           </div>
         </CardContent>
       </Card>
@@ -131,18 +153,34 @@ export function DashboardCharts({ data }: DashboardChartsProps) {
         </CardHeader>
         <CardContent className="h-[340px] p-8 pl-4">
           <ResponsiveContainer width="100%" height="100%">
-            <BarChart data={weekdayData} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
+            <BarChart
+              data={weekdayData}
+              margin={{ top: 10, right: 10, left: 0, bottom: 0 }}
+            >
               <defs>
                 <linearGradient id="barGradient" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="var(--primary)" stopOpacity={1} />
-                  <stop offset="100%" stopColor="var(--primary)" stopOpacity={0.6} />
+                  <stop
+                    offset="0%"
+                    stopColor="var(--primary)"
+                    stopOpacity={1}
+                  />
+                  <stop
+                    offset="100%"
+                    stopColor="var(--primary)"
+                    stopOpacity={0.6}
+                  />
                 </linearGradient>
               </defs>
-              <CartesianGrid strokeDasharray="8 8" vertical={false} stroke="var(--border)" opacity={0.5} />
-              <XAxis 
-                dataKey="name" 
-                axisLine={false} 
-                tickLine={false} 
+              <CartesianGrid
+                strokeDasharray="8 8"
+                vertical={false}
+                stroke="var(--border)"
+                opacity={0.5}
+              />
+              <XAxis
+                dataKey="name"
+                axisLine={false}
+                tickLine={false}
                 tick={{
                   fill: "var(--muted-foreground)",
                   fontSize: 10,
@@ -151,19 +189,23 @@ export function DashboardCharts({ data }: DashboardChartsProps) {
                 }}
                 dy={15}
               />
-              <YAxis 
-                axisLine={false} 
-                tickLine={false} 
-                tick={{ fill: "var(--muted-foreground)", fontSize: 10, fontWeight: 800 }}
+              <YAxis
+                axisLine={false}
+                tickLine={false}
+                tick={{
+                  fill: "var(--muted-foreground)",
+                  fontSize: 10,
+                  fontWeight: 800,
+                }}
               />
-              <Tooltip 
+              <Tooltip
                 content={<CustomTooltip />}
-                cursor={{ fill: "var(--primary)", opacity: 0.05 }} 
+                cursor={{ fill: "var(--primary)", opacity: 0.05 }}
               />
-              <Bar 
-                dataKey="value" 
-                fill="url(#barGradient)" 
-                radius={[12, 12, 0, 0]} 
+              <Bar
+                dataKey="value"
+                fill="url(#barGradient)"
+                radius={[12, 12, 0, 0]}
                 barSize={45}
                 className="hover:brightness-110 transition-all cursor-pointer"
               />
@@ -181,26 +223,33 @@ export function DashboardCharts({ data }: DashboardChartsProps) {
           <ResponsiveContainer width="100%" height="100%">
             <BarChart data={timeData} layout="vertical" margin={{ left: 20 }}>
               <XAxis type="number" hide />
-              <YAxis 
-                dataKey="name" 
-                type="category" 
-                axisLine={false} 
-                tickLine={false} 
-                tick={{ fill: "var(--foreground)", fontSize: 12, fontWeight: 900 }}
+              <YAxis
+                dataKey="name"
+                type="category"
+                axisLine={false}
+                tickLine={false}
+                tick={{
+                  fill: "var(--foreground)",
+                  fontSize: 12,
+                  fontWeight: 900,
+                }}
                 width={80}
               />
-              <Tooltip content={<CustomTooltip />} cursor={{ fill: "transparent" }} />
-              <Bar 
-                dataKey="value" 
-                fill="var(--foreground)" 
-                radius={[0, 20, 20, 0]} 
+              <Tooltip
+                content={<CustomTooltip />}
+                cursor={{ fill: "transparent" }}
+              />
+              <Bar
+                dataKey="value"
+                fill="var(--foreground)"
+                radius={[0, 20, 20, 0]}
                 barSize={32}
                 className="hover:fill-primary transition-colors cursor-pointer"
               >
-                 {timeData.map((entry, index) => (
-                  <Cell 
-                    key={`cell-${index}`} 
-                    fill={index === 0 ? "var(--primary)" : "var(--foreground)"} 
+                {timeData.map((entry, index) => (
+                  <Cell
+                    key={`cell-${index}`}
+                    fill={index === 0 ? "var(--primary)" : "var(--foreground)"}
                   />
                 ))}
               </Bar>
@@ -209,6 +258,5 @@ export function DashboardCharts({ data }: DashboardChartsProps) {
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }
-

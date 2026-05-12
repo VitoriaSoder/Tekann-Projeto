@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import { cn } from "@/lib/utils"
 import { useTranslation } from "react-i18next"
+import { StatusBadge } from "@/components/common/status-badge"
 export type GridTimelineProps<THeader> = {
   headers: THeader[]
   hours: string[]
@@ -15,7 +16,7 @@ export function GridTimeline<THeader>({ headers, hours, renderHeader, renderSlot
   const safeTab = Math.min(activeTab, headers.length - 1)
   return (
     <div className={cn("bg-card border border-border rounded-[24px] overflow-hidden shadow-sm", className)}>
-      {}
+   
       <div className="md:hidden flex flex-col">
         <div className="flex overflow-x-auto border-b border-border" style={{ scrollbarWidth: "none" }}>
           {headers.map((headerItem, colIndex) => (
@@ -49,7 +50,7 @@ export function GridTimeline<THeader>({ headers, hours, renderHeader, renderSlot
           ))}
         </div>
       </div>
-      {}
+  
       <div className="hidden md:block">
         <div className="overflow-auto max-h-[calc(100vh-260px)] min-h-[400px]">
           <div style={{ minWidth: `${96 + headers.length * 200}px` }}>
@@ -87,14 +88,14 @@ export function GridTimeline<THeader>({ headers, hours, renderHeader, renderSlot
           </div>
         </div>
       </div>
-      {}
-      <div className="flex items-center gap-4 px-4 py-3 border-t border-border">
-        <span className="flex items-center gap-1.5 text-xs font-semibold text-muted-foreground">
-          <span className="w-2.5 h-2.5 rounded-full bg-primary" /> {t("schedule:available")}
-        </span>
-        <span className="flex items-center gap-1.5 text-xs font-semibold text-muted-foreground">
-          <span className="w-2.5 h-2.5 rounded-full bg-destructive" /> {t("schedule:occupied")}
-        </span>
+  
+      <div className="flex items-center gap-2 px-4 py-3 border-t border-border flex-wrap">
+        <StatusBadge status="AVAILABLE">
+          {t("schedule:available")}
+        </StatusBadge>
+        <StatusBadge status="OCCUPIED">
+          {t("schedule:occupied")}
+        </StatusBadge>
       </div>
     </div>
   )

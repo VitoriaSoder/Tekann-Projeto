@@ -1,6 +1,7 @@
 import { format, isToday, isSameMonth } from "date-fns"
 import { cn } from "@/lib/utils"
 import { useTranslation } from "react-i18next"
+import { StatusBadge } from "@/components/common/status-badge"
 const WEEKDAYS = ["Seg", "Ter", "Qua", "Qui", "Sex", "Sáb", "Dom"]
 type DaySummary = {
   occupied: number
@@ -17,7 +18,7 @@ export function MonthView({ selectedDate, monthDays, daySummary, onDayClick }: M
   const { t } = useTranslation()
   return (
     <div className="bg-card border border-border rounded-[24px] overflow-hidden shadow-sm">
-      {}
+    
       <div className="grid grid-cols-7 border-b border-border">
         {WEEKDAYS.map(day => (
           <div key={day} className="py-3 text-center">
@@ -25,7 +26,7 @@ export function MonthView({ selectedDate, monthDays, daySummary, onDayClick }: M
           </div>
         ))}
       </div>
-      {}
+    
       <div className="grid grid-cols-7">
         {monthDays.map((date, i) => {
           if (!date) {
@@ -50,7 +51,7 @@ export function MonthView({ selectedDate, monthDays, daySummary, onDayClick }: M
                 (i + 1) % 7 === 0 && "border-r-0"
               )}
             >
-              {}
+            
               <div className="flex justify-start mb-1.5 md:mb-2">
                 <span className={cn(
                   "text-xs md:text-sm font-bold w-7 h-7 flex items-center justify-center rounded-full transition-colors",
@@ -63,7 +64,7 @@ export function MonthView({ selectedDate, monthDays, daySummary, onDayClick }: M
                   {format(date, "d")}
                 </span>
               </div>
-              {}
+            
               {summary && summary.total > 0 && (
                 <div className="hidden md:flex flex-col gap-1">
                   <div className="h-1.5 w-full rounded-full bg-muted overflow-hidden">
@@ -93,7 +94,7 @@ export function MonthView({ selectedDate, monthDays, daySummary, onDayClick }: M
                   </div>
                 </div>
               )}
-              {}
+            
               {summary && summary.total > 0 && (
                 <div className="md:hidden flex gap-1 flex-wrap mt-1">
                   {summary.occupied > 0 && (
@@ -108,17 +109,17 @@ export function MonthView({ selectedDate, monthDays, daySummary, onDayClick }: M
           )
         })}
       </div>
-      {}
-      <div className="flex items-center gap-4 px-4 py-3 border-t border-border">
-        <span className="flex items-center gap-1.5 text-xs font-semibold text-muted-foreground">
-          <span className="w-2.5 h-2.5 rounded-full bg-primary" /> {t("schedule:available")}
-        </span>
-        <span className="flex items-center gap-1.5 text-xs font-semibold text-muted-foreground">
-          <span className="w-2.5 h-2.5 rounded-full bg-amber-500" /> {t("schedule:partial")}
-        </span>
-        <span className="flex items-center gap-1.5 text-xs font-semibold text-muted-foreground">
-          <span className="w-2.5 h-2.5 rounded-full bg-destructive" /> {t("schedule:full")}
-        </span>
+    
+      <div className="flex items-center gap-2 px-4 py-3 border-t border-border flex-wrap">
+        <StatusBadge status="AVAILABLE">
+          {t("schedule:available")}
+        </StatusBadge>
+        <StatusBadge status="PARTIAL">
+          {t("schedule:partial")}
+        </StatusBadge>
+        <StatusBadge status="OCCUPIED">
+          {t("schedule:full")}
+        </StatusBadge>
       </div>
     </div>
   )

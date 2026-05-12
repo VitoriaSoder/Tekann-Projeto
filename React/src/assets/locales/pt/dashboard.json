@@ -18,6 +18,15 @@
   "bookings_by_weekday": "Reservas por Dia da Semana",
   "popular_times": "Horários Populares",
   "reservations": "Reservas",
-  "online_system": "Sistema Online"
+  "online_system": "Sistema Online",
+  "weekdays": {
+    "sun": "Dom",
+    "mon": "Seg",
+    "tue": "Ter",
+    "wed": "Qua",
+    "thu": "Qui",
+    "fri": "Sex",
+    "sat": "Sáb"
+  }
 }
 

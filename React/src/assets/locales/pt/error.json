@@ -8,5 +8,17 @@
     "email_taken":"E-mail já cadastrado.",
     "internal_error":"Erro interno no servidor. Tente novamente mais tarde.",
     "request_error":"Erro na requisição.",
-    "error_update_profile":"Erro ao atualizar perfil."
+    "error_update_profile":"Erro ao atualizar perfil.",
+    "invalid_email":"Insira um e-mail válido.",
+    "password_min_length":"A senha deve ter pelo menos 6 caracteres.",
+    "name_min_length":"O nome deve ter pelo menos 3 caracteres.",
+    "account_type_required":"Selecione um tipo de conta.",
+    "passwords_mismatch":"As senhas não coincidem.",
+    "court_name_min_length":"O nome deve ter pelo menos 3 caracteres.",
+    "court_type_invalid":"Selecione um tipo de quadra válido.",
+    "court_region_required":"Informe a região da quadra.",
+    "court_capacity_min":"A capacidade deve ser pelo menos 1 pessoa.",
+    "court_time_invalid":"Formato inválido. Use HH:mm.",
+    "court_slot_min":"Mínimo 30 minutos.",
+    "court_time_logic":"O horário de abertura deve ser anterior ao de fechamento."
 }

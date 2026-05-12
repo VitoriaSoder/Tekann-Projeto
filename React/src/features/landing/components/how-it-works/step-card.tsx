@@ -1,12 +1,12 @@
-import { Card, CardContent } from '@/components/ui/card'
-import { Smartphone, Calendar, CheckCircle2 } from 'lucide-react'
-import { Heading } from '@/components/common/heading'
-import { Text } from '@/components/common/text'
+import { Card, CardContent } from "@/components/ui/card";
+import { Smartphone, Calendar, CheckCircle2 } from "lucide-react";
+import { Heading } from "@/components/common/heading";
+import { Text } from "@/components/common/text";
 
 interface StepCardProps {
-  step: number
-  titleKey: string
-  descriptionKey: string
+  step: number;
+  titleKey: string;
+  descriptionKey: string;
 }
 
 export function StepCard({ step, titleKey, descriptionKey }: StepCardProps) {
@@ -19,21 +19,21 @@ export function StepCard({ step, titleKey, descriptionKey }: StepCardProps) {
             {step === 2 && <Calendar size={28} />}
             {step === 3 && <CheckCircle2 size={28} strokeWidth={2.5} />}
           </div>
-          <Heading 
-            level={3} 
-            tKey={titleKey} 
-            className="text-2xl font-bold text-foreground mb-4 group-hover:text-primary-foreground transition-colors" 
+          <Heading
+            level={3}
+            tKey={titleKey}
+            className="text-2xl font-bold text-foreground mb-4 group-hover:text-primary-foreground transition-colors"
           />
-          <Text 
+          <Text
             variant="large"
-            tKey={descriptionKey} 
-            className="leading-relaxed group-hover:text-primary-foreground/70 transition-colors" 
+            tKey={descriptionKey}
+            className="text-foreground group-hover:text-primary-foreground transition-colors"
           />
         </div>
-        <div className="absolute top-6 right-8 text-8xl font-bold text-foreground/5 group-hover:text-primary-foreground/10 transition-colors pointer-events-none">
+        <div className="absolute top-6 right-8 text-8xl font-bold text-foreground group-hover:text-primary-foreground transition-color pointer-events-none">
           0{step}
         </div>
       </CardContent>
     </Card>
-  )
+  );
 }

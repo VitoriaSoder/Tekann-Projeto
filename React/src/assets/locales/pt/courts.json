@@ -9,6 +9,13 @@
   "people": "pessoas",
   "capacity_prefix": "Até",
   "status_active": "Ativa",
+  "football": "Futebol",
+  "tennis": "Tênis",
+  "volleyball": "Vôlei",
+  "padel": "Padel",
+  "basketball": "Basquete",
+  "beach_tennis": "Beach Tennis",
+  "pickleball": "Pickleball",
 
   "status_inactive": "Inativa",
   "new_court": "Nova Quadra",

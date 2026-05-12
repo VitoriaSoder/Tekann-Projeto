@@ -12,6 +12,7 @@ import {
 } from "react-hook-form"
 import { cn } from "@/lib/utils"
 import { Label } from "@/components/ui/label"
+import { useTranslation } from "react-i18next"
 const Form = FormProvider
 type FormFieldContextValue<
   TFieldValues extends FieldValues = FieldValues,
@@ -124,10 +125,16 @@ const FormMessage = React.forwardRef<
   React.HTMLAttributes<HTMLParagraphElement>
 >(({ className, children, ...props }, ref) => {
   const { error, formMessageId } = useFormField()
+  const { t } = useTranslation()
   const body = error ? String(error?.message ?? "") : children
-  if (!body) {
+  
+
+  const translatedBody = error && body ? t(body as string) : body
+
+  if (!translatedBody) {
     return null
   }
+
   return (
     <p
       ref={ref}
@@ -135,7 +142,7 @@ const FormMessage = React.forwardRef<
       className={cn("text-sm font-medium text-destructive", className)}
       {...props}
     >
-      {body}
+      {translatedBody}
     </p>
   )
 })

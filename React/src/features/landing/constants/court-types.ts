@@ -1,8 +1,8 @@
-import soccerImg from '@/assets/images/soccer-court.png'
-import tennisImg from '@/assets/images/tennis-court.png'
-import multisportImg from '@/assets/images/multisport-court.png'
-import padelImg from '@/assets/images/padel-court.png'
-import beachTennisImg from '@/assets/images/beach-tennis-court.png'
+import soccerImg from '@/assets/images/soccer-court.webp'
+import tennisImg from '@/assets/images/tennis-court.webp'
+import multisportImg from '@/assets/images/multisport-court.webp'
+import padelImg from '@/assets/images/padel-court.webp'
+import beachTennisImg from '@/assets/images/beach-tennis-court.webp'
 
 export const courtTypes = [
   {

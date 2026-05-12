@@ -10,6 +10,7 @@
   "cancelled": "Cancelado",
   "cancel_booking": "Cancelar Reserva",
   "cancel_confirmation": "Tem certeza que deseja cancelar esta reserva?",
+  "cancel_error": "Não foi possível cancelar a reserva.",
   "reason_placeholder": "Informe o motivo do cancelamento...",
   "search_placeholder": "Pesquisar por nome do cliente...",
   "client": "Cliente",

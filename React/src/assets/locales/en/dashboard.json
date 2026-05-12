@@ -18,5 +18,14 @@
   "bookings_by_weekday": "Bookings by Weekday",
   "popular_times": "Popular Times",
   "reservations": "Bookings",
-  "online_system": "Online System"
+  "online_system": "Online System",
+  "weekdays": {
+    "sun": "Sun",
+    "mon": "Mon",
+    "tue": "Tue",
+    "wed": "Wed",
+    "thu": "Thu",
+    "fri": "Fri",
+    "sat": "Sat"
+  }
 }

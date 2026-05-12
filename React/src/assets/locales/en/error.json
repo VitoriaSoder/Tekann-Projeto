@@ -8,5 +8,17 @@
     "email_taken":"Email already registered.",
     "internal_error":"Internal server error. Try again later.",
     "request_error":"Request error.",
-    "error_update_profile":"Error updating profile."
+    "error_update_profile":"Error updating profile.",
+    "invalid_email":"Enter a valid email address.",
+    "password_min_length":"Password must be at least 6 characters.",
+    "name_min_length":"Name must be at least 3 characters.",
+    "account_type_required":"Select an account type.",
+    "passwords_mismatch":"Passwords do not match.",
+    "court_name_min_length":"Name must be at least 3 characters.",
+    "court_type_invalid":"Select a valid court type.",
+    "court_region_required":"Enter the court region.",
+    "court_capacity_min":"Capacity must be at least 1 person.",
+    "court_time_invalid":"Invalid format. Use HH:mm.",
+    "court_slot_min":"Minimum 30 minutes.",
+    "court_time_logic":"Opening time must be before closing time."
 }

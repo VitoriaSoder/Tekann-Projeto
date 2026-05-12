@@ -4,6 +4,7 @@
   "subtitle": "Schedule for the next 30 days",
   "description_user":"Manage your bookings and rentals in a simple and efficient way.",
   "confirmed_booking": "Confirmed Booking",
+  
   "players_count": "{{count}} Players",
   "available": "Available",
   "occupied": "Occupied",

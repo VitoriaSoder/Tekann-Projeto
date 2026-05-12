@@ -3,7 +3,7 @@ import { Box } from "@/components/common/box";
 import { Container } from "@/components/common/container";
 import { Logo } from "@/components/brand/logo";
 import { Text } from "@/components/common/text";
-import authBg from "@/assets/images/auth-bg.png";
+import authBg from "@/assets/images/auth-bg.webp";
 
 export default function AuthLayout() {
   return (
@@ -13,6 +13,9 @@ export default function AuthLayout() {
           src={authBg}
           alt=""
           className="w-full h-full object-cover opacity-10 grayscale"
+          loading="eager"
+          fetchPriority="high"
+          decoding="async"
         />
         <div className="absolute inset-0 bg-gradient-to-tr from-background via-background/80 to-transparent" />
       </div>

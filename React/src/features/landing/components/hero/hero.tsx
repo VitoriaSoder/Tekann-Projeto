@@ -1,6 +1,6 @@
 import { HeroTitle } from './hero-title'
 import { HeroCTA } from './hero-cta'
-import playerImg from '@/assets/images/Elite_tennis_player_202604172141.png'
+import playerImg from '@/assets/images/Elite_tennis_player_202604172141.webp'
 import { useTranslation } from 'react-i18next'
 import { Text } from '@/components/common/text'
 

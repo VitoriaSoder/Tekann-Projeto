@@ -1,35 +1,51 @@
 import { cn } from "@/lib/utils"
-import { useTranslation } from "react-i18next"
+
+export type GlobalStatus = 
+  | "ACTIVE" 
+  | "INACTIVE" 
+  | "AVAILABLE" 
+  | "OCCUPIED" 
+  | "CANCELLED" 
+  | "ADMIN" 
+  | "PENDING"
+  | "PARTIAL"
 
 export type StatusBadgeProps = {
-  status: "AVAILABLE" | "OCCUPIED" | "ADMIN"
+  status: GlobalStatus
   className?: string
   children?: React.ReactNode
 }
 
 export function StatusBadge({ status, className, children }: StatusBadgeProps) {
-  const { t } = useTranslation()
   
-  const getStatusLabel = () => {
+  const getStatusStyles = () => {
     switch (status) {
-      case "AVAILABLE": return t("common:available")
-      case "OCCUPIED": return t("common:occupied")
-      case "ADMIN": return t("common:admin")
-      default: return status
+      case "ACTIVE":
+      case "AVAILABLE":
+        return "bg-primary text-black border-primary"
+      case "INACTIVE":
+      case "OCCUPIED":
+      case "CANCELLED":
+        return "bg-destructive text-destructive-foreground border-destructive"
+      case "PENDING":
+      case "PARTIAL":
+        return "bg-amber-500 text-black border-amber-500"
+      case "ADMIN":
+        return "bg-blue-500/10 text-blue-500 border-blue-500/20"
+      default:
+        return "bg-secondary text-secondary-foreground border-transparent"
     }
   }
 
   return (
     <div
       className={cn(
-        "font-semibold text-xs uppercase px-3 py-1.5 rounded-full inline-flex items-center justify-center",
-        status === "AVAILABLE" && "bg-primary text-primary-foreground",
-        status === "OCCUPIED" && "bg-destructive text-destructive-foreground border border-destructive/20",
-        status === "ADMIN" && "bg-blue-500/10 text-blue-500 border border-blue-500/20",
+        "inline-flex items-center justify-center rounded-full border px-3 py-1 text-[10px] font-bold uppercase tracking-wider transition-colors",
+        getStatusStyles(),
         className
       )}
     >
-      {children || getStatusLabel()}
+      {children}
     </div>
   )
 }

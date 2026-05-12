@@ -3,8 +3,8 @@ import { Box } from '@/components/common/box'
 import { Container } from '@/components/common/container'
 import { Heading } from '@/components/common/heading'
 import { Text } from '@/components/common/text'
-import dashboardImg from '@/assets/images/dashboard-mockup.png'
-import mobileImg from '@/assets/images/mobile-mockup.png'
+import dashboardImg from '@/assets/images/dashboard-mockup.webp'
+import mobileImg from '@/assets/images/mobile-mockup.webp'
 
 export function MockupSection() {
   const { t } = useTranslation()
@@ -26,6 +26,8 @@ export function MockupSection() {
               src={dashboardImg} 
               alt="Quadra de Padel profissional ultra moderna" 
               className="w-full h-auto"
+              loading="lazy"
+              decoding="async"
             />
           </Box>
           
@@ -34,6 +36,8 @@ export function MockupSection() {
               src={mobileImg} 
               alt="Jogador de tênis em ação" 
               className="w-full h-auto"
+              loading="lazy"
+              decoding="async"
             />
           </Box>
           

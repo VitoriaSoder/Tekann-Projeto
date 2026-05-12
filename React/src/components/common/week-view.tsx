@@ -6,6 +6,7 @@ import { ScheduleDay } from "@/features/schedule/schemas/schedule-schema"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { ReservationModal } from "./reservation-modal"
 import { useTranslation } from "react-i18next"
+import { StatusBadge } from "@/components/common/status-badge"
 type WeekViewProps = {
   weekData: ScheduleDay[]
   hours: string[]
@@ -19,7 +20,7 @@ export function WeekView({ weekData, hours, onDayClick }: WeekViewProps) {
   const [activeDay, setActiveDay] = useState(0)
   return (
     <div className="bg-card border border-border rounded-[24px] overflow-hidden shadow-sm">
-      {}
+  
       <div className="flex items-center gap-3 px-4 py-3 border-b border-border">
         <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wide shrink-0">Quadra</span>
         <Select value={selectedCourtId} onValueChange={setSelectedCourtId}>
@@ -40,9 +41,9 @@ export function WeekView({ weekData, hours, onDayClick }: WeekViewProps) {
           </span>
         )}
       </div>
-      {}
+  
       <div className="md:hidden flex flex-col">
-        {}
+    
         <div className="flex overflow-x-auto border-b border-border" style={{ scrollbarWidth: "none" }}>
           {weekData.map((day, i) => (
             <button
@@ -65,7 +66,7 @@ export function WeekView({ weekData, hours, onDayClick }: WeekViewProps) {
             </button>
           ))}
         </div>
-        {}
+    
         <div className="overflow-auto max-h-[calc(100dvh-340px)] min-h-[260px]">
           {hours.map((hour) => {
             const dayGrid = weekData[activeDay]?.grid.find(c => c.courtId === selectedCourtId)
@@ -84,7 +85,7 @@ export function WeekView({ weekData, hours, onDayClick }: WeekViewProps) {
                       : "border-transparent hover:bg-muted hover:border-primary/30"
                   )}>
                     {isOccupied ? (
-                      <span className="text-xs font-semibold text-destructive">{t("schedule:occupied")}</span>
+                      <StatusBadge status="OCCUPIED">{t("schedule:occupied")}</StatusBadge>
                     ) : dayGrid ? (
                       <ReservationModal
                         defaultValues={{ courtId: selectedCourtId, date: weekData[activeDay].date, startTime: hour, endTime: format(addMinutes(new Date(`1970-01-01T${hour}:00`), 60), "HH:mm") }}
@@ -102,10 +103,10 @@ export function WeekView({ weekData, hours, onDayClick }: WeekViewProps) {
           })}
         </div>
       </div>
-      {}
+  
       <div className="hidden md:block overflow-auto max-h-[calc(100vh-300px)] min-h-[400px]">
         <div style={{ minWidth: `${80 + weekData.length * 130}px` }}>
-          {}
+      
           <div className="sticky top-0 z-20 flex border-b border-border bg-card">
             <div className="sticky left-0 z-30 w-20 shrink-0 border-r border-border bg-card" />
             {weekData.map((day, i) => (
@@ -132,7 +133,7 @@ export function WeekView({ weekData, hours, onDayClick }: WeekViewProps) {
               </div>
             ))}
           </div>
-          {}
+      
           {hours.map((hour) => (
             <div key={hour} className="flex group min-h-[64px] border-b border-border last:border-b-0 hover:bg-muted/10 transition-colors">
               <div className="sticky left-0 z-10 w-20 shrink-0 flex items-start justify-center pt-2.5 border-r border-border bg-card">
@@ -157,7 +158,7 @@ export function WeekView({ weekData, hours, onDayClick }: WeekViewProps) {
                         : "border-transparent hover:bg-muted hover:border-primary/30 group/cell"
                     )}>
                       {isOccupied ? (
-                        <span className="text-xs font-semibold text-destructive">{t("schedule:occupied")}</span>
+                        <StatusBadge status="OCCUPIED">{t("schedule:occupied")}</StatusBadge>
                       ) : court ? (
                         <ReservationModal
                           defaultValues={{ courtId: selectedCourtId, date: day.date, startTime: hour }}
@@ -176,14 +177,13 @@ export function WeekView({ weekData, hours, onDayClick }: WeekViewProps) {
           ))}
         </div>
       </div>
-      {}
-      <div className="flex items-center gap-4 px-4 py-3 border-t border-border">
-        <span className="flex items-center gap-1.5 text-xs font-semibold text-muted-foreground">
-          <span className="w-2.5 h-2.5 rounded-full bg-primary" /> {t("schedule:available")}
-        </span>
-        <span className="flex items-center gap-1.5 text-xs font-semibold text-muted-foreground">
-          <span className="w-2.5 h-2.5 rounded-full bg-destructive" /> {t("schedule:occupied")}
-        </span>
+      <div className="flex items-center gap-2 px-4 py-3 border-t border-border flex-wrap">
+        <StatusBadge status="AVAILABLE">
+          {t("schedule:available")}
+        </StatusBadge>
+        <StatusBadge status="OCCUPIED">
+          {t("schedule:occupied")}
+        </StatusBadge>
       </div>
     </div>
   )

@@ -14,17 +14,18 @@ import { useTranslation } from "react-i18next"
 import { Heading } from "@/components/common/heading"
 import { Text } from "@/components/common/text"
 import { PageLayout } from "@/components/common/page-layout"
+import { toast } from "sonner"
 
 export default function ReservationPage() {
-  const { 
-    reservations, 
-    isLoading, 
-    total, 
-    filters, 
-    getBookings, 
-    setFilters, 
+  const {
+    reservations,
+    isLoading,
+    total,
+    filters,
+    getBookings,
+    setFilters,
     setPage,
-    editReservation 
+    editReservation
   } = useReservations()
   const courts = useAppSelector(s => s.courts.lista)
   const [cancelModal, setCancelModal] = useState<{ isOpen: boolean; id: string; name: string }>({
@@ -47,8 +48,13 @@ export default function ReservationPage() {
     const order = filters.sortBy === field && filters.order === "asc" ? "desc" : "asc"
     setFilters({ sortBy: field, order })
   }
-  const handleCancel = (id: string, reason: string) => {
-    editReservation(id, "CANCELLED", () => {
+  const handleCancel = (id: string, _reason: string) => {
+    editReservation(id, "CANCELLED", (_result, err) => {
+      if (err) {
+        toast.error(err.msg || t("reservations:cancel_error"))
+        return
+      }
+      setCancelModal({ isOpen: false, id: "", name: "" })
       getBookings()
     })
   }
@@ -66,7 +72,7 @@ export default function ReservationPage() {
       <div className="flex flex-col md:flex-row gap-4 mb-6">
         <div className="relative flex-1">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-          <Input 
+          <Input
             placeholder={t("reservations:search_placeholder")}
             value={filters.search}
             onChange={handleSearch}
@@ -74,13 +80,13 @@ export default function ReservationPage() {
           />
         </div>
         <div className="flex gap-2">
-          <Button variant="outline" size="sm" onClick={() => handleSort("date")} className="rounded-full hover:text-muted-foreground">
+          <Button variant="outline" size="sm" onClick={() => handleSort("date")} className="rounded-full hover:text-black">
             <ArrowUpDown className="w-4 h-4 mr-2" />
-            <Text variant="bold" tKey="reservations:date" as="span" className="text-xs text-foreground" />
+            <Text variant="inherit" tKey="reservations:date" as="span" className="text-xs font-bold" />
           </Button>
-          <Button variant="outline" size="sm" onClick={() => handleSort("clientName")} className="rounded-full hover:text-muted-foreground">
+          <Button variant="outline" size="sm" onClick={() => handleSort("clientName")} className="rounded-full hover:text-black">
             <ArrowUpDown className="w-4 h-4 mr-2" />
-            <Text variant="bold" tKey="reservations:client" as="span" className="text-xs text-foreground" />
+            <Text variant="inherit" tKey="reservations:client" as="span" className="text-xs font-bold" />
           </Button>
         </div>
       </div>
@@ -96,7 +102,7 @@ export default function ReservationPage() {
           </div>
         ) : (
           reservations.map((reservation) => (
-            
+
             <div
               key={reservation.id}
               className="bg-card p-5 rounded-[24px] border border-border hover:border-primary/50 shadow-sm hover:shadow-md transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-4 group"
@@ -121,18 +127,17 @@ export default function ReservationPage() {
                 </div>
               </div>
               <div className="flex items-center gap-3 mt-4 sm:mt-0 pt-4 sm:pt-0 border-t border-border sm:border-0 justify-between sm:justify-end min-w-[160px]">
-                <StatusBadge status={reservation.status === "ACTIVE" ? "OCCUPIED" : "AVAILABLE"} className={reservation.status === "ACTIVE" ? "bg-primary" : "bg-destructive"}>
-                  <Text 
-                    variant="bold" 
-                    tKey={reservation.status === "ACTIVE" ? "reservations:active" : "reservations:cancelled"} 
-                    as="span" 
-                    className="text-[10px] text-black"
+                <StatusBadge status={reservation.status === "ACTIVE" ? "ACTIVE" : "CANCELLED"}>
+                  <Text
+                    variant="inherit"
+                    tKey={reservation.status === "ACTIVE" ? "reservations:active" : "reservations:cancelled"}
+                    as="span"
                   />
                 </StatusBadge>
                 {reservation.status === "ACTIVE" && (
-                  <Button 
-                    variant="ghost" 
-                    size="icon" 
+                  <Button
+                    variant="ghost"
+                    size="icon"
                     className="text-muted-foreground hover:text-red-500 rounded-full"
                     onClick={() => setCancelModal({ isOpen: true, id: reservation.id, name: reservation.clientName })}
                   >
@@ -146,9 +151,9 @@ export default function ReservationPage() {
       </div>
       {totalPages > 1 && (
         <div className="flex items-center justify-center gap-4 mt-8">
-          <Button 
-            variant="outline" 
-            size="sm" 
+          <Button
+            variant="outline"
+            size="sm"
             disabled={filters.page === 1}
             onClick={() => setPage(filters.page - 1)}
             className="rounded-full"
@@ -159,9 +164,9 @@ export default function ReservationPage() {
           <span className="text-sm font-bold">
             <Text tKey="common:page" as="span" className="mr-1" /> {filters.page} / {totalPages}
           </span>
-          <Button 
-            variant="outline" 
-            size="sm" 
+          <Button
+            variant="outline"
+            size="sm"
             disabled={filters.page === totalPages}
             onClick={() => setPage(filters.page + 1)}
             className="rounded-full"
@@ -171,7 +176,7 @@ export default function ReservationPage() {
           </Button>
         </div>
       )}
-      <CancelReservationModal 
+      <CancelReservationModal
         isOpen={cancelModal.isOpen}
         clientName={cancelModal.name}
         onClose={() => setCancelModal({ ...cancelModal, isOpen: false })}

@@ -13,27 +13,27 @@ export const COURT_TYPE_VALUES = [
 export type CourtTypeValue = (typeof COURT_TYPE_VALUES)[number]
 
 export const COURT_TYPE_SELECT_OPTIONS: { label: string; value: CourtTypeValue }[] = [
-  { label: "Padel", value: "Padel" },
-  { label: "Tênis", value: "Tennis" },
-  { label: "Beach Tennis", value: "Beach Tennis" },
-  { label: "Futebol", value: "soccer" },
-  { label: "Basquete", value: "Basketball" },
-  { label: "Vôlei", value: "Volleyball" },
-  { label: "Pickleball", value: "Pickleball" },
+  { label: "courts:padel", value: "Padel" },
+  { label: "courts:tennis", value: "Tennis" },
+  { label: "courts:beach_tennis", value: "Beach Tennis" },
+  { label: "courts:football", value: "soccer" },
+  { label: "courts:basketball", value: "Basketball" },
+  { label: "courts:volleyball", value: "Volleyball" },
+  { label: "courts:pickleball", value: "Pickleball" },
 ]
 
 export const quadraSchema = z.object({
-  name: z.string().min(3, { message: "O nome deve ter pelo menos 3 caracteres." }),
+  name: z.string().min(3, { message: "error:court_name_min_length" }),
   type: z.enum(COURT_TYPE_VALUES, {
-    message: "Selecione um tipo de quadra válido.",
+    message: "error:court_type_invalid",
   }),
-  region: z.string().min(2, { message: "Informe a região da quadra." }),
-  capacity: z.coerce.number().min(1, { message: "A capacidade deve ser pelo menos 1 pessoa." }),
-  openingTime: z.string().regex(/^([01]\d|2[0-3]):([0-5]\d)$/, "Formato inválido. Use HH:mm."),
-  closingTime: z.string().regex(/^([01]\d|2[0-3]):([0-5]\d)$/, "Formato inválido. Use HH:mm."),
-  slotDuration: z.coerce.number().min(30, { message: "Mínimo 30 minutos." }),
+  region: z.string().min(2, { message: "error:court_region_required" }),
+  capacity: z.coerce.number().min(1, { message: "error:court_capacity_min" }),
+  openingTime: z.string().regex(/^([01]\d|2[0-3]):([0-5]\d)$/, "error:court_time_invalid"),
+  closingTime: z.string().regex(/^([01]\d|2[0-3]):([0-5]\d)$/, "error:court_time_invalid"),
+  slotDuration: z.coerce.number().min(30, { message: "error:court_slot_min" }),
 }).refine(data => data.openingTime < data.closingTime, {
-  message: "O horário de abertura deve ser anterior ao de fechamento.",
+  message: "error:court_time_logic",
   path: ["closingTime"],
 })
 export type QuadraFormData = z.infer<typeof quadraSchema>

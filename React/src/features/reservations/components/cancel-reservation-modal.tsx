@@ -31,10 +31,12 @@ export function CancelReservationModal({
   const { t } = useTranslation()
   const [reason, setReason] = React.useState("")
 
+  React.useEffect(() => {
+    if (!isOpen) setReason("")
+  }, [isOpen])
+
   const handleConfirm = () => {
     onConfirm(reason)
-    setReason("")
-    onClose()
   }
 
   return (
