@@ -160,7 +160,9 @@
         "description": "Administre quadras de beach tennis com agendamento online para seus jogadores."
       }
     }
-  }
+  },
+  "no_results": "Nenhum resultado encontrado.",
+  "all": "Todos"
 }
 
 

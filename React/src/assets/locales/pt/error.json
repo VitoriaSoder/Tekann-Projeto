@@ -20,5 +20,15 @@
     "court_capacity_min":"A capacidade deve ser pelo menos 1 pessoa.",
     "court_time_invalid":"Formato inválido. Use HH:mm.",
     "court_slot_min":"Mínimo 30 minutos.",
-    "court_time_logic":"O horário de abertura deve ser anterior ao de fechamento."
+    "court_time_logic":"O horário de abertura deve ser anterior ao de fechamento.",
+    "user_inactive": "Usuário inativo.",
+    "user_not_found": "Usuário não encontrado.",
+    "incorrect_current_password": "Senha atual incorreta.",
+    "court_not_found_or_unauthorized": "Quadra não encontrada ou você não tem permissão para editá-la.",
+    "court_not_found_or_unauthorized_delete": "Quadra não encontrada ou você não tem permissão para excluí-la.",
+    "unauthorized_booking_view": "Você não tem permissão para visualizar esta reserva.",
+    "booking_conflict": "Conflito de horário: já existe uma reserva ativa neste período.",
+    "booking_not_found": "Reserva não encontrada.",
+    "unauthorized_booking_change": "Você não tem permissão para alterar esta reserva.",
+    "cancellation_not_allowed": "Cancelamento não permitido devido ao prazo de antecedência mínima."
 }

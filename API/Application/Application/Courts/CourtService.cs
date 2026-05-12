@@ -65,7 +65,7 @@ public class CourtService : ICourtService
     public async Task UpdateAsync(Guid id, UpdateCourtDto dto, Guid adminId)
     {
         var court = await _courtRepository.GetByIdAndAdminAsync(id, adminId);
-        if (court == null) throw new UnauthorizedAccessException("Quadra não encontrada ou você não tem permissão para editá-la.");
+        if (court == null) throw new UnauthorizedAccessException("court_not_found_or_unauthorized");
 
         court.Name = dto.Name;
         court.Type = dto.Type;
@@ -85,7 +85,7 @@ public class CourtService : ICourtService
     public async Task DeleteAsync(Guid id, Guid adminId)
     {
         var court = await _courtRepository.GetByIdAndAdminAsync(id, adminId);
-        if (court == null) throw new UnauthorizedAccessException("Quadra não encontrada ou você não tem permissão para excluí-la.");
+        if (court == null) throw new UnauthorizedAccessException("court_not_found_or_unauthorized_delete");
 
         await _courtRepository.DeleteAsync(id);
         _logger.LogInformation("Quadra '{Id}' removida pelo admin {AdminId}", id, adminId);

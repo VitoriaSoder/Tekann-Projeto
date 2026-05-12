@@ -37,6 +37,7 @@ import { Box } from "@/components/common/box";
 import { Heading } from "@/components/common/heading";
 import { Text } from "@/components/common/text";
 import { useTranslation } from "react-i18next";
+import { translateError } from "@/helpers/error-mapper";
 
 export function CourtFormModal() {
   const { t } = useTranslation();
@@ -63,7 +64,7 @@ export function CourtFormModal() {
   const onSubmit = (data: QuadraFormData) => {
     createCourt(data, function (_result, error) {
       if (error) {
-        toast.error(error.msg || t("courts:create_error"));
+        toast.error(translateError(error.msg, "courts:create_error"));
         return;
       }
       toast.success(t("courts:create_success"));

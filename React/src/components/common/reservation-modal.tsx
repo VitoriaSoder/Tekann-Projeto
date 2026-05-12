@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { translateError } from "@/helpers/error-mapper";
 import { CalendarIcon, Clock, AlertCircle } from "lucide-react";
 import { format, addYears, startOfMonth } from "date-fns";
 import { ptBR, enUS } from "date-fns/locale";
@@ -109,7 +110,7 @@ export function ReservationModal({
         values.status,
         function (_result: any, error: any) {
           if (error) {
-            setApiError(error.msg || t("reservations:edit_error"));
+            setApiError(translateError(error.msg, "reservations:edit_error"));
             return;
           }
           handleOpenChange(false);
@@ -119,7 +120,7 @@ export function ReservationModal({
     } else {
       createReservation(values, function (_result: any, error: any) {
         if (error) {
-          setApiError(error.msg || t("reservations:create_error"));
+          setApiError(translateError(error.msg, "reservations:create_error"));
           return;
         }
         handleOpenChange(false);
@@ -256,7 +257,7 @@ export function ReservationModal({
                       <Text
                         variant="bold"
                         tKey="reservations:date_label"
-                        className="text-foreground hover: text-xs"
+                        className="text-foreground text-xs"
                       />
                     </FormLabel>
                     <Popover>

@@ -34,13 +34,13 @@ public class UserService : IUserService
     public async Task<AuthResponseDto> LoginAsync(LoginDto dto)
     {
         var user = await _userRepository.GetByEmailAsync(dto.Email)
-            ?? throw new InvalidOperationException("Credenciais inválidas.");
+            ?? throw new InvalidOperationException("invalid_credentials");
 
         if (!user.IsActive)
-            throw new InvalidOperationException("Usuário inativo.");
+            throw new InvalidOperationException("user_inactive");
 
         if (!BCrypt.Net.BCrypt.Verify(dto.Password, user.PasswordHash))
-            throw new InvalidOperationException("Credenciais inválidas.");
+            throw new InvalidOperationException("invalid_credentials");
 
         var token = GenerateToken(user);
 
@@ -55,7 +55,7 @@ public class UserService : IUserService
     {
         var existing = await _userRepository.GetByEmailAsync(dto.Email);
         if (existing != null)
-            throw new InvalidOperationException("E-mail já cadastrado.");
+            throw new InvalidOperationException("email_taken");
 
         var user = new User
         {
@@ -123,7 +123,7 @@ public class UserService : IUserService
     public async Task UpdateStatusAsync(Guid id, bool isActive)
     {
         var user = await _userRepository.GetByIdAsync(id)
-            ?? throw new InvalidOperationException("Usuário não encontrado.");
+            ?? throw new InvalidOperationException("user_not_found");
 
         user.IsActive = isActive;
         await _userRepository.UpdateAsync(user);
@@ -145,7 +145,7 @@ public class UserService : IUserService
     public async Task UpdateProfileAsync(Guid userId, UpdateProfileDto dto)
     {
         var user = await _userRepository.GetByIdAsync(userId)
-            ?? throw new InvalidOperationException("Usuário não encontrado.");
+            ?? throw new InvalidOperationException("user_not_found");
 
         user.Name = dto.Name;
         await _userRepository.UpdateAsync(user);
@@ -156,10 +156,10 @@ public class UserService : IUserService
     public async Task ChangePasswordAsync(Guid userId, ChangePasswordDto dto)
     {
         var user = await _userRepository.GetByIdAsync(userId)
-            ?? throw new InvalidOperationException("Usuário não encontrado.");
+            ?? throw new InvalidOperationException("user_not_found");
 
         if (!BCrypt.Net.BCrypt.Verify(dto.CurrentPassword, user.PasswordHash))
-            throw new InvalidOperationException("Senha atual incorreta.");
+            throw new InvalidOperationException("incorrect_current_password");
 
         user.PasswordHash = BCrypt.Net.BCrypt.HashPassword(dto.NewPassword);
         await _userRepository.UpdateAsync(user);
@@ -170,7 +170,7 @@ public class UserService : IUserService
     public async Task DeleteAccountAsync(Guid userId)
     {
         var user = await _userRepository.GetByIdAsync(userId)
-            ?? throw new InvalidOperationException("Usuário não encontrado.");
+            ?? throw new InvalidOperationException("user_not_found");
 
         var userBookings = await _bookingRepository.GetAllByUserAsync(userId);
         foreach (var booking in userBookings)

@@ -24,6 +24,7 @@ import { Heading } from "@/components/common/heading";
 import { Text } from "@/components/common/text";
 import { PageLayout } from "@/components/common/page-layout";
 import { toast } from "sonner";
+import { translateError } from "@/helpers/error-mapper";
 
 export default function ReservationPage() {
   const { i18n } = useTranslation();
@@ -64,7 +65,7 @@ export default function ReservationPage() {
   const handleCancel = (id: string, _reason: string) => {
     editReservation(id, "CANCELLED", (_result, err) => {
       if (err) {
-        toast.error(err.msg || t("reservations:cancel_error"));
+        toast.error(translateError(err.msg, "reservations:cancel_error"));
         return;
       }
       setCancelModal({ isOpen: false, id: "", name: "" });

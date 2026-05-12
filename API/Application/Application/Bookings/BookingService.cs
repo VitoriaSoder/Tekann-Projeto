@@ -46,14 +46,14 @@ public class BookingService : IBookingService
         bookings = (sortBy?.ToLower(), order?.ToLower()) switch
         {
             ("clientname", "desc") => bookings.OrderByDescending(b => b.ClientName),
-            ("clientname", _)      => bookings.OrderBy(b => b.ClientName),
-            ("date", "desc")       => bookings.OrderByDescending(b => b.Date),
-            ("date", _)            => bookings.OrderBy(b => b.Date),
-            ("status", "desc")     => bookings.OrderByDescending(b => b.Status),
-            ("status", _)          => bookings.OrderBy(b => b.Status),
-            ("courtname", "desc")  => bookings.OrderByDescending(b => b.Court?.Name),
-            ("courtname", _)       => bookings.OrderBy(b => b.Court?.Name),
-            _                      => bookings.OrderByDescending(b => b.Date)
+            ("clientname", _) => bookings.OrderBy(b => b.ClientName),
+            ("date", "desc") => bookings.OrderByDescending(b => b.Date),
+            ("date", _) => bookings.OrderBy(b => b.Date),
+            ("status", "desc") => bookings.OrderByDescending(b => b.Status),
+            ("status", _) => bookings.OrderBy(b => b.Status),
+            ("courtname", "desc") => bookings.OrderByDescending(b => b.Court?.Name),
+            ("courtname", _) => bookings.OrderBy(b => b.Court?.Name),
+            _ => bookings.OrderByDescending(b => b.Date)
         };
 
         var total = bookings.Count();
@@ -70,12 +70,12 @@ public class BookingService : IBookingService
         if (role == RoleConstants.Admin)
         {
             if (booking.Court?.CreatedBy != userId)
-                throw new UnauthorizedAccessException("Você não tem permissão para visualizar esta reserva.");
+                throw new UnauthorizedAccessException("unauthorized_booking_view");
         }
         else
         {
             if (booking.UserId != userId)
-                throw new UnauthorizedAccessException("Você não tem permissão para visualizar esta reserva.");
+                throw new UnauthorizedAccessException("unauthorized_booking_view");
         }
 
         return MapToDto(booking);
@@ -91,7 +91,7 @@ public class BookingService : IBookingService
 
     public async Task<BookingDto> CreateAsync(CreateBookingDto dto, Guid userId)
     {
-        // 1. Check for time conflicts
+
         var existingBookings = await _bookingRepository.GetAllAsync();
         var hasConflict = existingBookings.Any(b =>
             b.CourtId == dto.CourtId &&
@@ -101,7 +101,7 @@ public class BookingService : IBookingService
             dto.EndTime > b.StartTime);
 
         if (hasConflict)
-            throw new InvalidOperationException("Conflito de horário: já existe uma reserva ativa neste período.");
+            throw new InvalidOperationException("booking_conflict");
 
         var booking = new Booking
         {
@@ -125,17 +125,17 @@ public class BookingService : IBookingService
     public async Task UpdateStatusAsync(Guid id, string status, Guid userId, string role)
     {
         var booking = await _bookingRepository.GetByIdAsync(id);
-        if (booking == null) throw new Exception("Booking not found");
+        if (booking == null) throw new Exception("booking_not_found");
 
         if (role == RoleConstants.Admin)
         {
             if (booking.Court?.CreatedBy != userId)
-                throw new UnauthorizedAccessException("Você não tem permissão para alterar esta reserva.");
+                throw new UnauthorizedAccessException("unauthorized_booking_change");
         }
         else
         {
             if (booking.UserId != userId)
-                throw new UnauthorizedAccessException("Você não tem permissão para alterar esta reserva.");
+                throw new UnauthorizedAccessException("unauthorized_booking_change");
         }
 
         if (status == BookingStatusConstants.Cancelled)
@@ -144,12 +144,12 @@ public class BookingService : IBookingService
             if (court != null)
             {
                 var bookingDateTime = booking.Date.Date.Add(booking.StartTime);
-                var now = DateTime.UtcNow.AddHours(-3); // Adjusting for Brasilia time if necessary, or just use Utc
-                                                        // Let's assume the DB stores in UTC or consistent time.
+                var now = DateTime.UtcNow.AddHours(-3);
+
 
                 if (bookingDateTime < DateTime.UtcNow.AddHours(court.CancellationDeadlineHours))
                 {
-                    throw new InvalidOperationException($"Cancelamento não permitido. Antecedência mínima de {court.CancellationDeadlineHours}h necessária.");
+                    throw new InvalidOperationException("cancellation_not_allowed");
                 }
             }
         }

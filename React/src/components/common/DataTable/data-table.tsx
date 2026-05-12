@@ -8,6 +8,7 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { Skeleton } from "@/components/ui/skeleton"
+import { useTranslation } from "react-i18next"
 export type ColumnDef<T> = {
   header: React.ReactNode
   accessorKey: keyof T | string
@@ -25,6 +26,7 @@ export function DataTable<T>({
   isLoading = false,
   onRowClick,
 }: DataTableProps<T>) {
+  const { t } = useTranslation()
   return (
     <div className="rounded-md border border-border">
       <Table>
@@ -72,7 +74,7 @@ export function DataTable<T>({
                 colSpan={columns.length}
                 className="h-24 text-center text-muted-foreground"
               >
-                Nenhum resultado encontrado.
+                {t("common:no_results")}
               </TableCell>
             </TableRow>
           )}
@@ -80,4 +82,4 @@ export function DataTable<T>({
       </Table>
     </div>
   )
-}
+}

@@ -106,6 +106,7 @@ function SidebarContent({ onNavigate }: { onNavigate?: () => void }) {
 
 export function AppLayout() {
   const [mobileOpen, setMobileOpen] = useState(false)
+  const { t } = useTranslation()
 
   return (
     <div className="flex min-h-screen bg-background text-foreground">
@@ -132,7 +133,7 @@ export function AppLayout() {
 
       <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
         <SheetContent side="left" className="p-0 w-72 flex flex-col bg-card border-r border-border gap-0">
-          <SheetTitle className="sr-only">Menu de navegação</SheetTitle>
+          <SheetTitle className="sr-only">{t("navigation:menu")}</SheetTitle>
           <SidebarContent onNavigate={() => setMobileOpen(false)} />
         </SheetContent>
       </Sheet>

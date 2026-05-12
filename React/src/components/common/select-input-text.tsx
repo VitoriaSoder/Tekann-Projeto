@@ -7,6 +7,7 @@ import {
   SelectContent,
 } from "../ui/select";
 import { Text } from "./text";
+import { useTranslation } from "react-i18next";
 
 export interface SelectOption {
   value: string;
@@ -32,12 +33,16 @@ export default function SelectInputText({
   value,
   onValueChange,
   options = [],
-  placeholder = "Selecione...",
+  placeholder,
   showAllOption = false,
-  allOptionLabel = "Todos",
+  allOptionLabel,
   className = "flex flex-col gap-1.5",
   triggerClassName = "w-full sm:w-[200px]",
 }: SelectInputTextProps) {
+  const { t } = useTranslation();
+  const displayPlaceholder = placeholder || t("common:select");
+  const displayAllOptionLabel = allOptionLabel || t("common:all");
+
   return (
     <div className={className}>
       {(title || description) && (
@@ -49,12 +54,12 @@ export default function SelectInputText({
 
       <Select value={value} onValueChange={onValueChange}>
         <SelectTrigger className={`bg-background border-border rounded-xl h-11 ${triggerClassName}`}>
-          <SelectValue placeholder={placeholder} />
+          <SelectValue placeholder={displayPlaceholder} />
         </SelectTrigger>
         <SelectContent className="rounded-xl border-border">
           {showAllOption && (
             <SelectItem value="todos" className="rounded-lg cursor-pointer">
-              {allOptionLabel}
+              {displayAllOptionLabel}
             </SelectItem>
           )}
 

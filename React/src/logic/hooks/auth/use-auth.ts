@@ -15,6 +15,8 @@ import { setAuth } from "@/logic/store/slices/auth-slice";
 import { useAppDispatch } from "@/logic/store/hooks";
 import i18n from "@/lib/i18n";
 
+import { translateError } from "@/helpers/error-mapper";
+
 function resolveErrorMessage(error: any): string {
   if (!error) return i18n.t("error:unknown_error");
   if (error.data?.errors) {
@@ -32,8 +34,11 @@ function resolveErrorMessage(error: any): string {
     500: "error:internal_error",
   };
 
-  if (error.data?.msg) return error.data.msg;
-  if (error.msg) return error.msg;
+  const message = error.data?.msg || error.msg;
+  if (message) {
+    return translateError(message, "error:request_error");
+  }
+
   if (error.status in status)
     return i18n.t(status[error.status as keyof typeof status]);
   return i18n.t("error:request_error");
