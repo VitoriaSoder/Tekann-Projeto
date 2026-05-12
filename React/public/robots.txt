@@ -1,2 +1,5 @@
 User-agent: *
-Disallow:
+Disallow: /dashboard
+Disallow: /admin
+
+Sitemap: https://sportscourt.site/sitemap.xml

@@ -7,9 +7,12 @@ import { Footer } from './footer'
 import { MockupSection } from './mockups/mockup-section'
 import { FeaturesGrid } from './features/features-grid'
 import { CourtTypesSection } from './courts/court-types-section'
+import { SEO } from '@/components/common/seo'
+
 export default function LandingPage() {
   return (
     <main className="min-h-screen bg-background text-foreground selection:bg-primary selection:text-primary-foreground">
+      <SEO />
       <Navbar />
       <Hero />
       <CourtTypesSection />
@@ -22,3 +25,4 @@ export default function LandingPage() {
     </main>
   )
 }
+

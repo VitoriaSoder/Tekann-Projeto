@@ -6,9 +6,13 @@
   <link rel="icon" type="image/x-icon" href="/favicon.ico" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-
+  <!-- Resource Hints -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+
+  <!-- Preload Critical Assets -->
+  <link rel="preload" href="/src/assets/images/Elite_tennis_player_202604172141.webp" as="image" type="image/webp">
   <link
     href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
     rel="stylesheet">
@@ -18,6 +22,7 @@
   <meta name="keywords" content="reserva de quadras, gestão de arenas, padel, tênis, beach tennis, agendamento esportivo" />
   <meta name="author" content="SportsCourt" />
   <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://sportscourt.site/" />
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website" />
@@ -32,6 +37,22 @@
   <meta property="twitter:title" content="SportsCourt | Gestão Inteligente de Arenas" />
   <meta property="twitter:description" content="Reserve quadras e gerencie sua arena com a plataforma mais moderna do mercado." />
   <meta property="twitter:image" content="https://sportscourt.site/og-image.png" />
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "SportsCourt",
+      "url": "https://sportscourt.site/",
+      "logo": "https://sportscourt.site/favicon.ico",
+      "description": "Plataforma de gestão de arenas e reserva de quadras esportivas.",
+      "sameAs": [
+        "https://facebook.com/sportscourt",
+        "https://instagram.com/sportscourt"
+      ]
+    }
+  </script>
 </head>
 
 <body>
