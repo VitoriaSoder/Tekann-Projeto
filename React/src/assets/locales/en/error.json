@@ -1,4 +1,12 @@
 {
-    "error_update_key":"error update key",
-    "error_removing_account": "Error removing account."
+    "error_update_key":"Error updating password.",
+    "error_removing_account":"Error removing account.",
+    "unknown_error":"Unknown error.",
+    "network_error":"Unable to connect to the server.",
+    "invalid_data":"Invalid data. Check the fields and try again.",
+    "invalid_credentials":"Invalid credentials.",
+    "email_taken":"Email already registered.",
+    "internal_error":"Internal server error. Try again later.",
+    "request_error":"Request error.",
+    "error_update_profile":"Error updating profile."
 }

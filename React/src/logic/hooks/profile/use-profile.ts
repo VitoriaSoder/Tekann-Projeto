@@ -26,13 +26,13 @@ export function useUpdateProfile() {
     updateProfile({ name: data.name }, function (_result, error) {
       setIsLoading(false)
       if (error) {
-        toast.error(error.msg || "Erro ao atualizar perfil.")
+        toast.error(error.msg || t("error:error_update_profile"))
         return
       }
       if (user && token) {
         dispatch(setAuth({ user: { ...user, name: data.name }, token }))
       }
-      toast.success(t("Perfil atualizado com sucesso!"))
+      toast.success(t("success:perfil_success"))
     })
   }
   return { form, isLoading, onSubmit: form.handleSubmit(onSubmit) }
@@ -52,7 +52,7 @@ export function useUpdatePassword() {
         toast.error(error.msg || t("error:error_update_key"))
         return
       }
-      toast.success(t("Senha atualizada com sucesso!"))
+      toast.success(t("success:password_success"))
       form.reset()
     })
   }
@@ -74,7 +74,7 @@ export function useDeleteAccount() {
       removeCookie("token")
       dispatch(clearAuth())
       navigate("/auth/login")
-      toast.success(t("Conta removida com sucesso."))
+      toast.success(t("success:account_removed"))
     })
   }
   return { isLoading, handleDelete }

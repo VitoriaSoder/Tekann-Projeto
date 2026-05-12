@@ -13,20 +13,22 @@ import { authLogin, authRegister } from "@/services/api"
 import { setCookie } from "@/helpers/cookie-utils"
 import { setAuth } from "@/logic/store/slices/auth-slice"
 import { useAppDispatch } from "@/logic/store/hooks"
+import i18n from "@/lib/i18n"
+
 function resolveErrorMessage(error: any): string {
-  if (!error) return "Erro desconhecido."
+  if (!error) return i18n.t("error:unknown_error")
   if (error.data?.errors) {
     const first = Object.values(error.data.errors as Record<string, string[]>)[0]
     if (Array.isArray(first) && first.length > 0) return first[0]
   }
   if (error.data?.msg) return error.data.msg
   if (error.msg) return error.msg
-  if (error.status === 0) return "Não foi possível conectar ao servidor."
-  if (error.status === 400) return "Dados inválidos. Verifique os campos e tente novamente."
-  if (error.status === 401) return "Credenciais inválidas."
-  if (error.status === 409) return "E-mail já cadastrado."
-  if (error.status === 500) return "Erro interno no servidor. Tente novamente mais tarde."
-  return "Erro na requisição."
+  if (error.status === 0) return i18n.t("error:network_error")
+  if (error.status === 400) return i18n.t("error:invalid_data")
+  if (error.status === 401) return i18n.t("error:invalid_credentials")
+  if (error.status === 409) return i18n.t("error:email_taken")
+  if (error.status === 500) return i18n.t("error:internal_error")
+  return i18n.t("error:request_error")
 }
 export function useAuthLogin() {
   const dispatch = useAppDispatch()
@@ -49,7 +51,7 @@ export function useAuthLogin() {
       }
       setCookie("token", result.token, 8)
       dispatch(setAuth({ user: result.user, token: result.token }))
-      toast.success(`Bem-vindo de volta, ${result.user.name}!`)
+      toast.success(i18n.t("success:welcome_back", { name: result.user.name }))
       navigate("/dashboard")
     })
   }
@@ -83,7 +85,7 @@ export function useAuthRegister() {
       }
       setCookie("token", result.token, 8)
       dispatch(setAuth({ user: result.user, token: result.token }))
-      toast.success(`Conta criada com sucesso! Bem-vindo, ${result.user.name}!`)
+      toast.success(i18n.t("success:account_created", { name: result.user.name }))
       navigate("/dashboard")
     })
   }

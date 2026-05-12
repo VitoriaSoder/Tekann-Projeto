@@ -1,4 +1,7 @@
 {
-    "perfil_success":"Perfil atualizado com sucesso!"
-
+    "perfil_success":"Profile updated successfully!",
+    "welcome_back": "Welcome back, {{name}}!",
+    "account_created": "Account successfully created! Welcome, {{name}}!",
+    "password_success": "Password updated successfully!",
+    "account_removed": "Account removed successfully."
 }

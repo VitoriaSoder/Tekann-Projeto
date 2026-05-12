@@ -1,4 +1,12 @@
 {
     "error_update_key":"Erro ao atualizar senha.",
-    "error_removing_account":"Erro ao remover conta."
+    "error_removing_account":"Erro ao remover conta.",
+    "unknown_error":"Erro desconhecido.",
+    "network_error":"Não foi possível conectar ao servidor.",
+    "invalid_data":"Dados inválidos. Verifique os campos e tente novamente.",
+    "invalid_credentials":"Credenciais inválidas.",
+    "email_taken":"E-mail já cadastrado.",
+    "internal_error":"Erro interno no servidor. Tente novamente mais tarde.",
+    "request_error":"Erro na requisição.",
+    "error_update_profile":"Erro ao atualizar perfil."
 }
