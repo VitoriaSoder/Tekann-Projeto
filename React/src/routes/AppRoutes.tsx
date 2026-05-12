@@ -1,16 +1,17 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import AuthLayout from '@/pages/auth/auth-layout'
-import Login from '@/pages/auth/login'
-import Register from '@/pages/auth/register'
-import LandingPage from '@/pages/landing/landing-page'
-import { ProtectedRoute } from '@/components/common/protected-route'
-import { AppLayout } from '@/components/common/app-layout'
-import DashboardPage from '@/pages/dashboard/dashboard-page'
-import SchedulePage from '@/pages/schedule/schedule-page'
-import CourtList from '@/pages/courts/court-list/court-list'
-import CourtDetail from '@/pages/courts/court-detail/court-detail'
-import ReservationPage from '@/pages/reservations/reservation-page'
-import ProfilePage from '@/pages/profile/profile-page'
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import AuthLayout from "@/pages/auth/auth-layout";
+import Login from "@/pages/auth/login";
+import Register from "@/pages/auth/register";
+import LandingPage from "@/pages/landing/landing-page";
+import { ProtectedRoute } from "@/components/common/protected-route";
+import { AppLayout } from "@/components/common/app-layout";
+import DashboardPage from "@/pages/dashboard/dashboard-page";
+import SchedulePage from "@/pages/schedule/schedule-page";
+import CourtList from "@/pages/courts/court-list/court-list";
+import CourtDetail from "@/pages/courts/court-detail/court-detail";
+import ReservationPage from "@/pages/reservations/reservation-page";
+import ProfilePage from "@/pages/profile/profile-page";
+
 function AppRoutes() {
   return (
     <BrowserRouter>
@@ -32,6 +33,6 @@ function AppRoutes() {
         </Route>
       </Routes>
     </BrowserRouter>
-  )
+  );
 }
-export default AppRoutes
+export default AppRoutes;
