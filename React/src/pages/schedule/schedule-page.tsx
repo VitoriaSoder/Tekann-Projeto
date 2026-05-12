@@ -229,6 +229,7 @@ export default function SchedulePage() {
                     selected={selectedDate}
                     onSelect={handleMobileDateSelect}
                     initialFocus
+                    locale={dateLocale}
                     className="p-3"
                   />
                 </PopoverContent>
@@ -290,6 +291,7 @@ export default function SchedulePage() {
                     selected={selectedDate}
                     onSelect={handleDesktopDateSelect}
                     initialFocus
+                    locale={dateLocale}
                     className="p-3"
                   />
                 </PopoverContent>

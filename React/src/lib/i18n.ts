@@ -56,8 +56,11 @@ i18n
     },
     ns: ['common', 'navigation', 'dashboard', 'reservations', 'auth', 'courts', 'profile', 'schedule', 'success','error'],
     defaultNS: 'common',
-    lng: 'pt',
     fallbackLng: 'pt',
+    detection: {
+      order: ['localStorage', 'cookie', 'htmlTag', 'path', 'subdomain'],
+      caches: ['localStorage'],
+    },
     interpolation: {
       escapeValue: false,
     },

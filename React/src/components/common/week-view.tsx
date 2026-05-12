@@ -1,31 +1,36 @@
 import { useState } from "react"
 import { format, isToday, addMinutes } from "date-fns"
-import { ptBR } from "date-fns/locale"
+import { ptBR, enUS } from "date-fns/locale"
 import { cn } from "@/lib/utils"
 import { ScheduleDay } from "@/features/schedule/schemas/schedule-schema"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { ReservationModal } from "./reservation-modal"
 import { useTranslation } from "react-i18next"
 import { StatusBadge } from "@/components/common/status-badge"
+import { Text } from "./text"
+
 type WeekViewProps = {
   weekData: ScheduleDay[]
   hours: string[]
   onDayClick?: (date: Date) => void
 }
+
 export function WeekView({ weekData, hours, onDayClick }: WeekViewProps) {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
+  const dateLocale = i18n.language === "en" ? enUS : ptBR
   const courts = weekData[0]?.grid ?? []
   const [selectedCourtId, setSelectedCourtId] = useState<string>(courts[0]?.courtId ?? "")
   const activeCourt = courts.find(c => c.courtId === selectedCourtId) ?? courts[0]
   const [activeDay, setActiveDay] = useState(0)
+
   return (
     <div className="bg-card border border-border rounded-[24px] overflow-hidden shadow-sm">
   
       <div className="flex items-center gap-3 px-4 py-3 border-b border-border">
-        <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wide shrink-0">Quadra</span>
+        <Text variant="small" tKey="reservations:court_label" className="text-xs font-semibold text-muted-foreground uppercase tracking-wide shrink-0" />
         <Select value={selectedCourtId} onValueChange={setSelectedCourtId}>
           <SelectTrigger className="h-9 w-auto min-w-[160px] rounded-full border-border text-sm font-semibold">
-            <SelectValue placeholder="Selecione a quadra" />
+            <SelectValue placeholder={t("reservations:court_placeholder")} />
           </SelectTrigger>
           <SelectContent className="rounded-2xl border-border shadow-xl">
             {courts.map(c => (
@@ -55,7 +60,7 @@ export function WeekView({ weekData, hours, onDayClick }: WeekViewProps) {
               )}
             >
               <span className="text-[10px] font-semibold uppercase text-muted-foreground">
-                {format(day.date, "EEE", { locale: ptBR })}
+                {format(day.date, "EEE", { locale: dateLocale })}
               </span>
               <span className={cn(
                 "text-base font-bold mt-0.5 w-8 h-8 flex items-center justify-center rounded-full",
@@ -120,7 +125,7 @@ export function WeekView({ weekData, hours, onDayClick }: WeekViewProps) {
                 )}
               >
                 <div className="text-[11px] font-semibold text-muted-foreground uppercase tracking-wide">
-                  {format(day.date, "EEE", { locale: ptBR })}
+                  {format(day.date, "EEE", { locale: dateLocale })}
                 </div>
                 <div className={cn(
                   "text-xl font-bold mt-1 w-9 h-9 flex items-center justify-center rounded-full mx-auto transition-colors",

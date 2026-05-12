@@ -43,7 +43,8 @@
   "invalid_time_order": "A hora de início deve ser anterior a hora de término.",
   "syncing": "Sincronizando disponibilidade...",
   "client_name_required": "O nome do cliente deve possuir no mínimo 3 caracteres.",
-  "occupied_slots_info": "Os horários riscados já possuem reservas confirmadas. Escolha um dos blocos destacados para sua partida."
+  "occupied_slots_info": "Os horários riscados já possuem reservas confirmadas. Escolha um dos blocos destacados para sua partida.",
+  "today": "Hoje"
 }
 
 

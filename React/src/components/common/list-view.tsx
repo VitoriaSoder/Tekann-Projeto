@@ -1,22 +1,25 @@
 import { format, isToday, isTomorrow, addDays, isBefore, startOfDay } from "date-fns"
-import { ptBR } from "date-fns/locale"
+import { ptBR, enUS } from "date-fns/locale"
 import { cn } from "@/lib/utils"
 import { Clock, MapPin, Users, CalendarOff } from "lucide-react"
 import { Booking } from "@/logic/store/slices/booking-slice"
 import { ReservationModal } from "./reservation-modal"
 import { useTranslation } from "react-i18next"
+
 type ListViewProps = {
   bookings: Booking[]
   selectedDate?: Date
 }
-function getDayLabel(date: Date, t: any): string {
+
+function getDayLabel(date: Date, t: any, locale: any): string {
   if (isToday(date)) return t("common:today")
   if (isTomorrow(date)) return t("common:tomorrow")
-  return format(date, "EEEE, d 'de' MMMM", { locale: ptBR })
+  return format(date, locale.code === 'pt-BR' ? "EEEE, d 'de' MMMM" : "EEEE, MMMM d", { locale })
 }
 
 export function ListView({ bookings }: ListViewProps) {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
+  const dateLocale = i18n.language === "en" ? enUS : ptBR
   const today = startOfDay(new Date())
   const rangeEnd = addDays(today, 30)
 
@@ -76,7 +79,7 @@ export function ListView({ bookings }: ListViewProps) {
                   {format(date, "d")}
                 </div>
                 <span className="text-sm font-bold text-foreground capitalize">
-                  {getDayLabel(date, t)}
+                  {getDayLabel(date, t, dateLocale)}
                 </span>
                 <span className="ml-auto text-xs font-semibold text-muted-foreground">
                   {t("schedule:reservations_count", { count: dayBookings.length })}

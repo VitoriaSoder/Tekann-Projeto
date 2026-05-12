@@ -293,6 +293,7 @@ export function ReservationModal({
                           disabled={(date) =>
                             date < new Date(new Date().setHours(0, 0, 0, 0))
                           }
+                          locale={dateLocale}
                           captionLayout="dropdown"
                           startMonth={startOfMonth(new Date())}
                           endMonth={addYears(new Date(), 2)}

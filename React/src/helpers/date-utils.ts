@@ -3,7 +3,9 @@ import { ptBR } from "date-fns/locale"
 import { ViewMode } from "@/components/common/view-toggle"
 
 export function getViewTitle(view: ViewMode, selectedDate: Date, weekDays: Date[], t: any, locale: any): string {
-  if (view === "day") return format(selectedDate, "dd 'de' MMMM, yyyy", { locale })
+  if (view === "day") {
+    return format(selectedDate, locale.code === 'pt-BR' ? "dd 'de' MMMM, yyyy" : "MMMM dd, yyyy", { locale })
+  }
   if (view === "week") {
     const start = format(weekDays[0], "d MMM", { locale })
     const end = format(weekDays[6], "d MMM yyyy", { locale })
@@ -12,10 +14,10 @@ export function getViewTitle(view: ViewMode, selectedDate: Date, weekDays: Date[
   if (view === "month") return format(selectedDate, "MMMM yyyy", { locale })
   return t("schedule:subtitle")
 }
-export function formatFullDate(date: Date, locale: any = ptBR): string {
-  return format(date, "dd 'de' MMMM, yyyy", { locale })
+export function formatFullDate(date: Date, locale: any): string {
+  return format(date, locale.code === 'pt-BR' ? "dd 'de' MMMM, yyyy" : "MMMM dd, yyyy", { locale })
 }
-export function formatShortDate(date: Date, locale: any = ptBR): string {
+export function formatShortDate(date: Date, locale: any): string {
   return format(date, "EEE, dd MMM", { locale })
 }
 export function isSameDayLocal(dateLeft: Date, dateRight: Date): boolean {

@@ -9,6 +9,7 @@ import {
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu"
 import { Text } from "./text"
+import { cn } from "@/lib/utils"
 
 export function LanguageToggle() {
   const { i18n } = useTranslation()
@@ -28,10 +29,22 @@ export function LanguageToggle() {
       </DropdownMenuTrigger>
 
       <DropdownMenuContent align="start" className="w-56 rounded-xl border-border shadow-xl">
-        <DropdownMenuItem onClick={() => changeLanguage("pt")} className="rounded-lg gap-2 cursor-pointer">
+        <DropdownMenuItem 
+          onClick={() => changeLanguage("pt")} 
+          className={cn(
+            "rounded-lg gap-2 cursor-pointer",
+            i18n.language === "pt" ? "bg-primary/10 text-primary" : ""
+          )}
+        >
           <span className="text-xs font-bold">PT</span> <Text variant="inherit" as="span">Português</Text>
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => changeLanguage("en")} className="rounded-lg gap-2 cursor-pointer">
+        <DropdownMenuItem 
+          onClick={() => changeLanguage("en")} 
+          className={cn(
+            "rounded-lg gap-2 cursor-pointer",
+            i18n.language === "en" ? "bg-primary/10 text-primary" : ""
+          )}
+        >
           <span className="text-xs font-bold">EN</span> <Text variant="inherit" as="span">English</Text>
         </DropdownMenuItem>
       </DropdownMenuContent>

@@ -1,28 +1,39 @@
-import { format, isToday, isSameMonth } from "date-fns"
+import { format, isToday, isSameMonth, startOfWeek, addDays } from "date-fns"
+import { ptBR, enUS } from "date-fns/locale"
 import { cn } from "@/lib/utils"
 import { useTranslation } from "react-i18next"
 import { StatusBadge } from "@/components/common/status-badge"
-const WEEKDAYS = ["Seg", "Ter", "Qua", "Qui", "Sex", "Sáb", "Dom"]
+
 type DaySummary = {
   occupied: number
   available: number
   total: number
 }
+
 type MonthViewProps = {
   selectedDate: Date
   monthDays: (Date | null)[]
   daySummary: Map<string, DaySummary>
   onDayClick: (date: Date) => void
 }
+
 export function MonthView({ selectedDate, monthDays, daySummary, onDayClick }: MonthViewProps) {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
+  const dateLocale = i18n.language === "en" ? enUS : ptBR
+  
+
+  const firstDayOfWeek = startOfWeek(new Date(), { weekStartsOn: 1 })
+  const weekdays = Array.from({ length: 7 }).map((_, i) => 
+    format(addDays(firstDayOfWeek, i), "EEE", { locale: dateLocale })
+  )
+
   return (
     <div className="bg-card border border-border rounded-[24px] overflow-hidden shadow-sm">
     
       <div className="grid grid-cols-7 border-b border-border">
-        {WEEKDAYS.map(day => (
+        {weekdays.map(day => (
           <div key={day} className="py-3 text-center">
-            <span className="text-[11px] font-semibold text-muted-foreground uppercase tracking-wide">{day}</span>
+            <span className="text-[11px] font-semibold text-muted-foreground uppercase tracking-wide capitalize">{day}</span>
           </div>
         ))}
       </div>

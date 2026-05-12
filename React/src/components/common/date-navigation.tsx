@@ -1,5 +1,7 @@
 import { ChevronLeft, ChevronRight, Calendar as CalendarIcon } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { useTranslation } from "react-i18next"
+
 type DateNavigationProps = {
   title: string
   onPrev: () => void
@@ -8,6 +10,9 @@ type DateNavigationProps = {
   onOpenCalendar?: () => void
 }
 export function DateNavigation({ title, onPrev, onNext, onToday, onOpenCalendar }: DateNavigationProps) {
+
+const {t} = useTranslation()
+
   return (
     <div className="flex flex-wrap items-center gap-4">
       <div className="flex items-center gap-2">
@@ -18,7 +23,7 @@ export function DateNavigation({ title, onPrev, onNext, onToday, onOpenCalendar 
           <ChevronRight className="w-5 h-5" />
         </Button>
         <Button variant="outline" onClick={onToday} className="rounded-full px-6 font-semibold hidden sm:flex">
-          Hoje
+         {t("reservations:today")}
         </Button>
       </div>
       <div className="flex items-center gap-3 ml-2">

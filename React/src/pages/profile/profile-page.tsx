@@ -160,7 +160,7 @@ function DeleteAccountSection() {
         <Button
           variant="outline"
           onClick={() => setIsOpen(true)}
-          className="shrink-0 h-11 px-5 rounded-xl border-red-200 text-red-600 hover:bg-red-50 hover:border-red-300 font-semibold"
+          className="shrink-0 h-11 px-5 rounded-xl border-red-200 text-red-600  hover:text-red-500 hover:bg-red-500/10  font-semibold"
         >
           <Trash2 size={15} className="mr-2" />
           {t("profile:danger_zone.delete_account_button")}

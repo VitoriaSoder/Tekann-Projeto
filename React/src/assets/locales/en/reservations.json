@@ -37,7 +37,8 @@
   "free": "Free",
   "occupied": "Occupied",
   "syncing": "Syncing availability...",
-  "occupied_slots_info": "The crossed-out times already have confirmed reservations. Choose one of the highlighted blocks for your match."
+  "occupied_slots_info": "The crossed-out times already have confirmed reservations. Choose one of the highlighted blocks for your match.",
+  "today": "Today"
 }
 
 
