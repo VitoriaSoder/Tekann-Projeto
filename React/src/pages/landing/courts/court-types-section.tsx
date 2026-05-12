@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { courtTypes } from "../../constants/court-types";
+import { courtTypes } from "@/features/landing/constants/court-types";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useTranslation } from "react-i18next";

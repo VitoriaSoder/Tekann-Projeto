@@ -4,7 +4,7 @@ import { Trophy, BookOpen, CalendarDays, Users, TrendingUp, CheckCircle2, MapPin
 import { useAppSelector, useAppDispatch } from "@/logic/store/hooks"
 import { getCourtsWorker } from "@/logic/workers/court-worker"
 import { getBookingsWorker } from "@/logic/workers/booking-worker"
-import { DashboardCharts } from "@/features/dashboard/components/dashboard-charts"
+import { DashboardCharts } from "./dashboard-charts"
 import { cn } from "@/lib/utils"
 import { Court } from "@/logic/store/slices/court-slice"
 import { Box } from "@/components/common/box"

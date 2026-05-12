@@ -36,7 +36,13 @@
   "available_times": "Horários Disponíveis",
   "free": "Livre",
   "occupied": "Ocupado",
+  "date_required": "A data da reserva é obrigatória.",
+  "court_name_required": "É obrigatório selecionar uma quadra.",
+  "invalid_start_time": "Hora de início inválida. Use formato HH:mm.",
+  "invalid_end_time": "Hora de término inválida. Use formato HH:mm.",
+  "invalid_time_order": "A hora de início deve ser anterior a hora de término.",
   "syncing": "Sincronizando disponibilidade...",
+  "client_name_required": "O nome do cliente deve possuir no mínimo 3 caracteres.",
   "occupied_slots_info": "Os horários riscados já possuem reservas confirmadas. Escolha um dos blocos destacados para sua partida."
 }
 

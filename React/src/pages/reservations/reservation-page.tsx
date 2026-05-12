@@ -6,8 +6,8 @@ import { ptBR } from "date-fns/locale"
 import { CalendarIcon, MapPin, Clock, Search, XCircle, ArrowUpDown, ChevronLeft, ChevronRight } from "lucide-react"
 import { ReservationModal } from "@/components/common/reservation-modal"
 import { StatusBadge } from "@/components/common/status-badge"
-import { ReservationSkeleton } from "@/features/reservations/components/reservation-skeleton"
-import { CancelReservationModal } from "@/features/reservations/components/cancel-reservation-modal"
+import { ReservationSkeleton } from "./reservation-skeleton"
+import { CancelReservationModal } from "./cancel-reservation-modal"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { useTranslation } from "react-i18next"
@@ -62,6 +62,7 @@ export default function ReservationPage() {
   const user = useAppSelector(s => s.auth.user)
   const isAdmin = user?.role === "ADMIN"
 
+
   return (
     <PageLayout
       titleKey="reservations:title"
@@ -112,7 +113,7 @@ export default function ReservationPage() {
                   <Text variant="bold" className="text-foreground mb-1 line-clamp-1">{reservation.clientName}</Text>
                   <div className="flex items-center text-sm font-medium text-muted-foreground gap-1.5">
                     <MapPin className="w-4 h-4 opacity-70" />
-                    {getCourtName(reservation.courtId)}
+                  {reservation.courtName}
                   </div>
                 </div>
                 <div className="flex flex-row md:flex-col items-center md:items-start gap-4 md:gap-1 mt-2 md:mt-0">
